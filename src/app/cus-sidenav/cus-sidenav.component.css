@@ -1,0 +1,97 @@
+.sidenav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #e5e5e5;
+  padding-top: 20px;
+  transition: width 0.3s;
+  overflow: hidden;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidenav.open {
+  width: 250px;
+}
+
+.sidenav:not(.open) {
+  width: 0;
+}
+
+.sidenav .logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidenav .logo {
+  max-width: 100%;
+  height: auto;
+}
+
+.sidenav .menu {
+  flex-grow: 1;
+}
+
+.sidenav .menu-item {
+  padding: 15px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #194280;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidenav .menu-item:hover, .sidenav .menu-item.active {
+  /* color: #000000; */
+  background-color: rgb(255, 255, 255);
+}
+
+.sidenav .pro {
+  margin-top: auto;
+}
+
+.sidenav .pro .menu-item {
+  padding: 15px;
+  font-size: 20px;
+  color: #194280;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidenav .pro .menu-item:hover, .sidenav .pro .menu-item.active {
+  color: #194280;
+  background-color: rgb(255, 255, 255);
+}
+
+.main-content {
+  transition: margin-left 0.3s;
+  padding: 10px;
+}
+
+.nav-toggle {
+  font-size: 25px;
+  cursor: pointer;
+  width: 100%;
+  background-color: #e5e5e5;
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: 0;
+  }
+
+  .sidenav.open {
+    width: 250px;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
