@@ -4,9 +4,9 @@
             <div class="p-3 bg-white">
                 <div class="d-flex justify-content-between align-items-center">
                     <button class="btn heading1" data-bs-toggle="modal" data-bs-target="#myModal">New Transaction</button>
-                    <div class="d-flex flex-row align-items-center text-muted">
-                      <input type="text" class="form-control search-input mr-2" placeholder="Search...">
-                      <i class="fa fa-search"></i>    
+                    <div class="d-flex flex-row align-items-center text-muted search-container">
+                        <input type="text" class="form-control search-input" placeholder="Search...">
+                        <i class="fa fa-search ml-2"></i>    
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -18,8 +18,8 @@
                                 <th>Laundry Item</th>
                                 <th>Qty</th>
                                 <th>Weight</th>
+                                <th>Date</th>
                                 <th>Price</th>
-                                <th>Amount</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -27,49 +27,49 @@
                           <tr>
                             <td></td>
                             <td>LP-12345-628-110</td>
-                            <td> <img src="assort.png" alt="">Assorted</td>
+                            <td> <img src="assets/assort.png" alt="">Assorted</td>
                             <td>2 pcs</td>
                             <td>30kg</td>
-                            <td>60 pesos</td>
-                            <td>65 pesos</td>
+                            <td>12/12/2024</td>
+                            <td>65.00</td>
                             <td>
-                              <p class="status delivered">To Received</p>
+                              <p class="status delivered">Received</p>
                           </td>
                           </tr>
                           <tr>
                             <td></td>
                             <td>LP-12345-628-110</td>
-                            <td> <img src="comforter.png" alt="">Comforer</td>
+                            <td> <img src="assets/comforter.png" alt="">Comforter</td>
                             <td>2 pcs</td>
                             <td>30kg</td>
                             <td>60 pesos</td>
                             <td>65 pesos</td>
                             <td>
-                              <p class="status pending">To Fold</p>
+                              <p class="status pending">Fold</p>
                             </td>
                           </tr>
                           <tr>
                             <td></td>
                             <td>LP-12345-628-110</td>
-                            <td> <img src="brief.png" alt="">Assorted</td>
+                            <td> <img src="assets/brief.png" alt="">Assorted</td>
                             <td>2 pcs</td>
                             <td>30kg</td>
                             <td>60 pesos</td>
                             <td>65 pesos</td>
                             <td>
-                              <p class="status cancelled">To Release</p>
+                              <p class="status cancelled">Release</p>
                           </td>
                           </tr>
                           <tr>
                             <td></td>
                             <td>LP-12345-628-110</td>
-                            <td> <img src="blanket.png" alt="">Blanket</td>
+                            <td> <img src="assets/blanket.png" alt="">Blanket</td>
                             <td>2 pcs</td>
                             <td>30kg</td>
                             <td>60 pesos</td>
                             <td>65 pesos</td>
                             <td>
-                              <p class="status shipped">To Shipped</p>
+                              <p class="status shipped">Shipped</p>
                             </td>
                           </tr>
                         </tbody>
@@ -80,61 +80,89 @@
                 <!-- <span class="solditems">View Sold Items</span> -->
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="p-3 bg-white">
-                <h6 class="account">Upload Payment</h6>
-                <!-- <span class="mt-5 balance">$6,268.00</span> -->
+        <div class="col-12 col-md-4">
+            <!-- Transaction Card -->
+            <div class="card border-bottom p-3 mb-3 mx-3 bg-white transaction">
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th class="pl-0">Item</th>
+                    <th class="text-right">Label</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Table Rows -->
+                  <tr>
+                    <td class="pl-0">Assorted Clothes</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-primary">P30 / KG</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Maong/Jacket</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-info">P40 / KG</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Towel/Bed Sheet/Curtain</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-danger">P50 / KG</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Blankets</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-success">9</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Comforter</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Carpet</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Hand Wash(Asstd)(Minimum 2KG)</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">P60</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Rounded Warning</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Rounded Warning</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Rounded Warning</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="pl-0">Rounded Warning</td>
+                    <td class="pr-0 text-right">
+                      <span class="badge rounded-pill bg-warning">4</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="border-top border-bottom p-3 bg-white transaction">
-                <!-- <span class="money mr-3">Transfer balance</span>
-                <span class="money">View Transaction</span> -->
-                <div class="browse-button d-flex align-items-center justify-content-center rounded p-3">
-                  <label for="UploadedFile" class="mb-0">
-                      <span class="fas fa-upload me-2"></span>
-                      <span class="browse-text" style="cursor: pointer;">Choose a file</span>
-                  </label>
-                  <input class="browse-input" type="file" required name="UploadedFile" id="UploadedFile" style="display: none;"/>
-                </div>            
-            </div>
-            <div class="p-3 py-4 bg-white">
-                <!-- <div class="d-flex justify-content-between">
-                    <span class="goal">Goal and Overview</span>
-                    <span class="goal">January 2020<i class="fa fa-angle-down ml-2"></i></span>
-                </div>
-                <div class="progress-1 mt-3">
-                    <div class="d-flex justify-content-between">
-                        <span class="revenue">Revenue</span>
-                        <span class="revenue">$1,000.00/10,000.00</span>
-                    </div>
-                    <div class="progress mt-1">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="progress-2 mt-3">
-                    <div class="d-flex justify-content-between">
-                        <span class="orders">Orders</span>
-                        <span class="orders">5/20</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="progress-3 mt-3">
-                    <div class="d-flex justify-content-between">
-                        <span class="customer">Customer Satisfaction</span>
-                        <span class="customer">Very Good</span>
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between mt-3 text-dark">
-                    <i class="fa fa-smile-o"></i>
-                    <i class="fa fa-smile-o"></i>
-                </div>
-            </div> -->
-        </div>
-    </div>
+          </div>
+          
   </div>
   
   <!-- The Modal -->
@@ -148,133 +176,103 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
-        <!-- Modal body -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <form action="" id="manage-laundry">
-                <div class="col-lg-12">
-                    <input type="hidden" name="id" value="">
-                    <div class="row">
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="customer_name" class="control-label">Customer Name</label>
-                              <input type="text" class="form-control" name="customer_name" id="customer_name" value="">
-                          </div>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <label for="customer_num" class="control-label">Contact number</label>
-                              <input type="text" class="form-control" name="customer_num" id="customer_num" value="">
-                          </div>
-                      </div>
-                  </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label for="browser" class="control-label">Laundry Type</label>
-                          <input class= "text" list="browsers" id="browser" name="browser">
-                          <datalist id="browsers">
-                            <option value="Shirt/Upper">
-                            <option value="Jacket">
-                            <option value="Shorts">
-                            <option value="Pants">
-                            <option value="Towel">
-                            <option value="Bed Sheets">
-                            <option value="Blanket">
-                            <option value="Comforter">
-                            <option value="Curtains">
-                            <option value="Pillow Case">
-                            </datalist>
-                        </div>
-                      </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="" class="control-label">Count</label>
-                                <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="" class="control-label">&nbsp;</label>
-                                <button class="btn btn-info btn-sm btn-block" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <table class="table table-bordered" id="list">
-                            <colgroup>
-                                <col width="30%">
-                                <col width="15%">
-                                <col width="25%">
-                                <col width="25%">
-                                <col width="5%">
-                            </colgroup>
-                            <thead>
-                            <tr>
-                                <th class="text-center">Category</th>
-                                <th class="text-center">Qty</th>
-                                <th class="text-center">Unit Price</th>
-                                <th class="text-center">Amount</th>
-                                <!-- <th class="text-center"></th> -->
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <!-- Rows will be added dynamically -->
-                             <td>Short</td>
-                             <td>60kg</td>
-                             <td>20 pesos</td>
-                             <td>25 pesos</td>
-                            </tbody>
-                            <!-- <tfoot>
-                            <tr>
-                                <th class="text-right" colspan="3"></th>
-                                <th class="text-right" id="tamount"></th>
-                                <th class="text-right"></th>
-                            </tr>
-                            </tfoot> -->
-                        </table>
-                    </div>
-                    <hr>
-                    <!-- <div class="row">
-                        <div class="form-group">
-                            <div class="custom-control custom-switch" id="pay-switch">
-                                <input type="checkbox" class="custom-control-input" value="1" name="pay" id="paid">
-                                <label class="custom-control-label" for="paid">Pay</label>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- <div class="row" id="payment">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="control-label">Amount Tendered</label>
-                                <input type="number" step="any" min="0" value="0" class="form-control text-right" name="tendered">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="control-label">Total Amount</label>
-                                <input type="number" step="any" min="1" value="0" class="form-control text-right" name="tamount" readonly="">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="" class="control-label">Change</label>
-                                <input type="number" step="any" min="1" value="0" class="form-control text-right" name="change" readonly="">
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-            </form>
+      <!-- Modal Body -->
+<div class="modal-body">
+    <div class="container-fluid">
+      <form action="" id="manage-laundry">
+        <div class="col-lg-12">
+          <input type="hidden" name="id" value="">
+          <div class="row">
+            <!-- Customer Name -->
+            <div class="col-12 col-md-6 mb-3">
+              <div class="form-group">
+                <label for="customer_name" class="control-label">Customer Name</label>
+                <input type="text" class="form-control" name="customer_name" id="customer_name" value="">
+              </div>
+            </div>
+            <!-- Contact Number -->
+            <div class="col-12 col-md-6 mb-3">
+              <div class="form-group">
+                <label for="customer_num" class="control-label">Contact number</label>
+                <input type="text" class="form-control" name="customer_num" id="customer_num" value="">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <!-- Laundry Type -->
+            <div class="col-12 col-md-4 mb-3">
+              <div class="form-group">
+                <label for="browser" class="control-label">Laundry Type</label>
+                <input class="form-control" list="browsers" id="browser" name="browser">
+                <datalist id="browsers">
+                  <option value="Shirt/Upper">
+                  <option value="Jacket">
+                  <option value="Shorts">
+                  <option value="Pants">
+                  <option value="Towel">
+                  <option value="Bed Sheets">
+                  <option value="Blanket">
+                  <option value="Comforter">
+                  <option value="Curtains">
+                  <option value="Pillow Case">
+                </datalist>
+              </div>
+            </div>
+            <!-- Count -->
+            <div class="col-12 col-md-4 mb-3">
+              <div class="form-group">
+                <label for="weight" class="control-label">Count</label>
+                <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
+              </div>
+            </div>
+            <!-- Add to List Button -->
+            <div class="col-12 col-md-4 d-flex align-items-end mb-3">
+              <div class="form-group w-100">
+                <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
+              </div>
+            </div>
+          </div>
+          <!-- Table for List Items -->
+          <div class="row">
+            <div class="col-12">
+              <table class="table table-bordered" id="list">
+                <colgroup>
+                  <col width="30%">
+                  <col width="15%">
+                  <col width="25%">
+                  <col width="25%">
+                  <col width="5%">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th class="text-center">Category</th>
+                    <th class="text-center">Qty</th>
+                    <th class="text-center">Unit Price</th>
+                    <th class="text-center">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Rows will be added dynamically -->
+                  <tr>
+                    <td>Short</td>
+                    <td>60kg</td>
+                    <td>20 pesos</td>
+                    <td>25 pesos</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <hr>
         </div>
-        </div>
-  
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
-        </div>
-  
-      </div>
+      </form>
     </div>
   </div>
+  
+  <!-- Modal Footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+  </div>
+  
   

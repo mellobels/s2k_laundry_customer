@@ -6,8 +6,8 @@ import { CusCurtransComponent } from './cus-curtrans/cus-curtrans.component';
 export const homeRoute: Routes = [
     {path: 'homemain',component: CusMainhomeComponent,
         children: [
-            {path:"custrans",component:CusCurtransComponent},
-            {path:"",redirectTo:"custrans",pathMatch:"full"}
+            {path:"cuscurtrans",component:CusCurtransComponent},
+            {path:"",redirectTo:"cuscurtrans",pathMatch:"full"}
     ]
 
     },
