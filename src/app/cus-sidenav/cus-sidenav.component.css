@@ -18,8 +18,35 @@
   max-height: 40px;
 }
 
+<<<<<<< HEAD
 .navbar .nav-toggle {
   display: none; /* Hidden on larger screens */
+=======
+.sidenav .pro {
+  margin-top: auto;
+}
+
+.sidenav .pro .menu-item {
+  padding: 15px;
+  font-size: 20px;
+  color: #194280;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidenav .pro .menu-item:hover, .sidenav .pro .menu-item.active {
+  color: #194280;
+  background-color: rgb(255, 255, 255);
+}
+
+.main-content {
+  transition: margin-left 0.3s;
+  /* padding: 10px; */
+}
+
+.nav-toggle {
+>>>>>>> dcfa6609305a97f553451a567c6fad99b9eaeeba
   font-size: 25px;
   cursor: pointer;
   color: #194280;
