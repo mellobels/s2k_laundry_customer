@@ -1,0 +1,258 @@
+.container {
+    width: 100vw;
+    overflow-x: auto;
+}
+
+.border-container {
+    border: 1px solid #000000;
+    padding: 20px;
+}
+
+/* Search bar styling */
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    border-radius: 20px;
+    outline: none;
+}
+
+.search-addon {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.search-icon {
+    font-size: 16px;
+    color: #194280;
+}
+
+.search-addon:hover .search-icon {
+    color: #0056b3;
+}
+
+/* Table hover effect */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.table-hover tbody tr:hover td {
+    color: #000;
+}
+
+.table-hover tbody tr:hover .btn-transparent {
+    color: #194280;
+}
+
+.btn-transparent:hover {
+    background-color: transparent;
+    color: #194280;
+}
+/* Modal and Progress Bar Styling */
+.title {
+    color: #194280;
+    font-weight: 600;
+    margin-bottom: 2vh;
+    padding: 0 8%;
+    font-size: initial;
+}
+
+#details {
+    font-weight: 400;
+}
+
+.info {
+    padding: 5% 8%;
+}
+
+#heading {
+    color: rgb(0, 85, 255);
+    line-height: 6vh;
+}
+
+.pricing {
+    background-color: rgb(197, 197, 197);
+    padding: 2vh 8%;
+    font-weight: 400;
+    line-height: 2.5;
+}
+
+.total {
+    padding: 2vh 8%;
+    color: rgb(0, 85, 255);
+    font-weight: bold;
+}
+.footer{
+    padding: 0 8%;
+    font-size: x-small;
+    color: black;
+}
+.footer img{
+    height: 5vh;
+    opacity: 0.2;
+}
+.footer a{
+    color: rgb(0, 85, 255);
+}
+.footer .col-10, .col-2{
+    display: flex;
+    padding: 3vh 0 0;
+    align-items: center;
+}
+.footer .row{
+    margin: 0;
+}
+#progressbar {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: rgb(0, 85, 255);
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: x-small;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: rgb(160, 159, 159);
+}
+
+#progressbar #step1:before {
+    content: "";
+    color: rgb(0, 85, 255);
+    width: 5px;
+    height: 5px;
+    margin-left: 0px !important;
+    /* padding-left: 11px !important */
+}
+
+#progressbar #step2:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-left: 32%;
+}
+
+#progressbar #step3:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 32% ; 
+    /* padding-right: 11px !important */
+}
+
+#progressbar #step4:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 0px !important;
+    /* padding-right: 11px !important */
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh;
+}
+
+#progressbar li:after {
+    content: '';
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 1px;
+    z-index: 1;
+}
+.progress-track{
+    padding: 0 8%;
+}
+#progressbar li:nth-child(2):after {
+    margin-right: auto;
+}
+
+#progressbar li:nth-child(1):after {
+    margin: auto;
+}
+
+#progressbar li:nth-child(3):after {
+    float: left;
+    width: 68%;
+}
+#progressbar li:nth-child(4):after {
+    margin-left: auto;
+    width: 132%;
+}
+
+#progressbar  li.active{
+    color: black;
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background:rgb(0, 85, 255);
+}
+/* Existing table styles */
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+/* Add hover effect */
+.table-hover tbody tr:hover {
+    background-color: #f5f5f5; /* Light gray background on hover */
+    cursor: pointer; /* Optional: change cursor to pointer on hover */
+}
+
+/* Additional styling for better visibility */
+.table-hover tbody tr:hover td {
+    color: #000; /* Change text color on hover */
+}
+
+.table-hover tbody tr:hover .btn-transparent {
+    color: #007ae1; /* Change icon color on hover */
+}
+
+/* Ensure the buttons remain styled on hover */
+.btn-transparent:hover {
+    background-color: transparent; /* No background on hover */
+    color: #0056b3; /* Slightly darker blue on hover */
+}

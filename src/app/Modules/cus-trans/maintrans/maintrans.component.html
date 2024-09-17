@@ -19,19 +19,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>TRK001</td>
-          <td>2022-01-01</td>
-          <td>Pending</td>
-          <td>Cash</td>
-          <td>P500</td>
-          <td>
-            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
-              <i class="fas fa-eye" style="font-size: 16px;"></i>
-            </button>
-          </td>
-        </tr>
-        <tr>
+        @for(h of history; track h){
+          <tr>
+            <tr>
+              <td>{{ h.tracking_number }}</td>
+              <td>{{ h.datetime_of_payment }}</td>
+              <td>{{ h.transac_status }}</td>
+              <td>{{ h.mode_of_payment }}</td>
+              <td>{{ h.amount }}</td>
+              <td>
+              <button type="button" class="btn btn-transparent">
+                <i class="fas fa-eye" style="font-size: 16px;" (click)="showdet(h.transac_id)"></i>
+              </button>
+            </td>
+          </tr>
+        }
+        
+        <!-- <tr>
           <td>TRK002</td>
           <td>2022-01-05</td>
           <td>Delivered</td>
@@ -63,7 +67,7 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

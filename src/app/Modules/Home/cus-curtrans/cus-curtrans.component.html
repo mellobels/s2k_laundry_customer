@@ -3,7 +3,7 @@
         <div class="col-md-8 border-right">
             <div class="p-3 bg-white">
                 <div class="d-flex justify-content-between align-items-center">
-                    <button class="btn heading1" data-bs-toggle="modal" data-bs-target="#myModal">New Transaction</button>
+                    <button class="btn heading1" data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()">New Transaction</button>
                     <div class="d-flex flex-row align-items-center text-muted search-container">
                         <input type="text" class="form-control search-input" placeholder="Search...">
                         <i class="fa fa-search ml-2"></i>    
@@ -92,13 +92,17 @@
                 </thead>
                 <tbody>
                   <!-- Table Rows -->
-                  <tr>
-                    <td class="pl-0">Assorted Clothes</td>
-                    <td class="pr-0 text-right">
-                      <span class="badge rounded-pill bg-primary">P30 / KG</span>
-                    </td>
-                  </tr>
-                  <tr>
+                
+                    @for (l of list; track l){
+                      <tr>
+                      <td class="pl-0">{{l.category}}</td>
+                      <td class="pr-0 text-right">
+                        <span class="badge rounded-pill bg-primary">P{{l.price}}</span>
+                      </td>
+                    </tr>
+                    }
+                   
+                  <!-- <tr>
                     <td class="pl-0">Maong/Jacket</td>
                     <td class="pr-0 text-right">
                       <span class="badge rounded-pill bg-info">P40 / KG</span>
@@ -163,7 +167,7 @@
             </div>
           </div>
           
-  </div>
+  </div> -->
   
   <!-- The Modal -->
   <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -172,7 +176,7 @@
   
         <!-- Modal Header -->
         <div class="modal-header">
-          <h4 class="modal-title">Tracking Number</h4>
+          <h4 class="modal-title">{{trackingNumber}}</h4>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
   
@@ -184,19 +188,21 @@
           <input type="hidden" name="id" value="">
           <div class="row">
             <!-- Customer Name -->
+            @for (c of customerdata; track c) {
             <div class="col-12 col-md-6 mb-3">
               <div class="form-group">
                 <label for="customer_name" class="control-label">Customer Name</label>
-                <input type="text" class="form-control" name="customer_name" id="customer_name" value="">
+                <input type="text" class="form-control" name="customer_name" id="customer_name" value="{{c.cust_fname}}" readonly>
               </div>
             </div>
             <!-- Contact Number -->
             <div class="col-12 col-md-6 mb-3">
               <div class="form-group">
                 <label for="customer_num" class="control-label">Contact number</label>
-                <input type="text" class="form-control" name="customer_num" id="customer_num" value="">
+                <input type="text" class="form-control" name="customer_num" id="customer_num" value="{{c.cust_phoneno}}" readonly>
               </div>
             </div>
+          }
           </div>
           <hr>
           <div class="row">
@@ -229,7 +235,7 @@
             <!-- Add to List Button -->
             <div class="col-12 col-md-4 d-flex align-items-end mb-3">
               <div class="form-group w-100">
-                <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
+                <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
               </div>
             </div>
           </div>
@@ -248,19 +254,17 @@
                   <tr>
                     <th class="text-center">Category</th>
                     <th class="text-center">Qty</th>
-                    <th class="text-center">Unit Price</th>
-                    <th class="text-center">Amount</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <!-- Rows will be added dynamically -->
-                  <tr>
-                    <td>Short</td>
-                    <td>60kg</td>
-                    <td>20 pesos</td>
-                    <td>25 pesos</td>
-                  </tr>
-                </tbody>
+                @for(l of laundrylist; track l){
+                  <tbody>
+                      <td>{{ l.category }}</td>
+                      <td>{{ l.qty }}</td>
+                      <td class="text-center">
+                        <button class="btn btn-danger btn-sm" (click)="removeFromList(l)"><i class="fa fa-times"></i></button>
+                      </td>
+                  </tbody>
+              }
               </table>
             </div>
           </div>
@@ -272,7 +276,7 @@
   
   <!-- Modal Footer -->
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="insert()">Save</button>
   </div>
   
   

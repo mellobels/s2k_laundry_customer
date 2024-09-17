@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { CusAccountComponent } from './cus-account/cus-account.component';
-import { MainAccountComponent } from '../../../../../S2kadmin/capstone-admin/src/app/Modules/account/main-account/main-account.component';
-import { accountRoute } from '../../../../../S2kadmin/capstone-admin/src/app/Modules/account/account.routes';
+import { MainaccountComponent } from './mainaccount/mainaccount.component';
+
 
 export const accountroute: Routes = [
-    {path:"main", component: MainAccountComponent,
+    {path:"main", component: MainaccountComponent,
         children:[
             {path:'account',component: CusAccountComponent},
-            {path:'',redirectTo:'account', pathMatch:'full'}
+            {path:'',redirectTo:'main', pathMatch:'full'}
         ]
     },
     {path:"",redirectTo:"main", pathMatch:'full'}
