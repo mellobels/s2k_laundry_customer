@@ -1,9 +1,9 @@
-.navbar {
+/* .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 60px;
-  background-color: #e5e5e5;
+  background-color: #5988E2;
   padding: 0 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -18,10 +18,9 @@
   max-height: 40px;
 }
 
-<<<<<<< HEAD
 .navbar .nav-toggle {
-  display: none; /* Hidden on larger screens */
-=======
+  display: none;
+}
 .sidenav .pro {
   margin-top: auto;
 }
@@ -29,27 +28,26 @@
 .sidenav .pro .menu-item {
   padding: 15px;
   font-size: 20px;
-  color: #194280;
+  color: #5988E2;
   display: flex;
   align-items: center;
   transition: background-color 0.3s, color 0.3s;
 }
 
 .sidenav .pro .menu-item:hover, .sidenav .pro .menu-item.active {
-  color: #194280;
+  color: #5988E2;
   background-color: rgb(255, 255, 255);
 }
 
 .main-content {
   transition: margin-left 0.3s;
-  /* padding: 10px; */
+  
 }
 
 .nav-toggle {
->>>>>>> dcfa6609305a97f553451a567c6fad99b9eaeeba
   font-size: 25px;
   cursor: pointer;
-  color: #194280;
+  color: #5988E2;
 }
 
 .navbar .menu {
@@ -76,14 +74,14 @@
   border-radius: 5px;
 }
 
-/* Responsive Styles */
+
 @media screen and (max-width: 768px) {
   .navbar .nav-toggle {
-    display: block; /* Show the toggle button on smaller screens */
+    display: block; 
   }
 
   .navbar .menu {
-    display: none; /* Hide the menu on smaller screens */
+    display: none; 
     flex-direction: column;
     width: 100%;
     position: absolute;
@@ -94,7 +92,7 @@
   }
 
   .navbar .menu.open {
-    display: flex; /* Show the menu when open */
+    display: flex; 
   }
 
   .navbar .menu-item {
@@ -104,6 +102,181 @@
   }
 
   .main-content {
-    margin-top: 60px; /* Account for the navbar height */
+    margin-top: 60px; 
+  }
+} */
+/* .nav-item:hover {
+  color: #EEC718;
+  transition: background-color 0.3s ease;
+  border-radius: 20px;
+}
+
+.nav-item:hover a {
+  color: #EEC718;
+  text-decoration: none;
+}
+.nav-link{
+  color: #fff;
+}
+@media (max-width: 991px){
+  .sidebar{
+    background-color: rgba(89, 137, 226, 0.252);
+    backdrop-filter: blur(10px);
+  }
+} */
+
+/* *{
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+body{
+  font-family: "Montserrat", sans-serif;
+} */
+/* Navigation Bar */
+/* nav {
+  background: #5988e2;
+  height: 80px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+ 
+}
+
+label.logo {
+  color: white;
+  font-size: 35px;
+  line-height: 80px;
+  padding: 0 100px;
+  font-weight: bold;
+}
+
+img {
+  width: 100px;
+  height: 50px;
+  margin-top: 5px;
+}
+
+nav ul {
+  float: right;
+  margin-right: 20px;
+ 
+}
+
+nav ul li {
+  display: inline-block;
+  line-height: 80px;
+  margin: 0 5px;
+}
+
+nav ul li a {
+  color: white;
+  font-size: 17px;
+  padding: 7px 13px;
+  border-radius: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.active, a:hover {
+  background: #7baee1;
+  transition: 0.5s;
+}
+
+.checkbtn {
+  font-size: 30px;
+  color: white;
+  float: right;
+  line-height: 80px;
+  margin-right: 40px;
+  cursor: pointer;
+  display: none;
+}
+
+#check {
+  display: none;
+}
+@media (max-width: 952px) {
+  label.logo {
+    font-size: 30px;
+    padding-left: 50px;
+  }
+
+  nav ul li a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 858px) {
+  .checkbtn {
+    display: block;
+  }
+
+  ul {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #2c3e50;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: all 0.5s;
+    overflow-x: hidden;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 50px 0;
+    line-height: 30px;
+  }
+
+  nav ul li a {
+    font-size: 20px;
+  }
+
+  a:hover, a.active {
+    background: none;
+    color: #0082e6;
+  }
+
+  #check:checked ~ ul {
+    left: 0;
+  }
+} */
+/* section{
+  background: url(bg1.jpg) no-repeat;
+  background-size: cover;
+  height: calc(100vh - 80px);
+} */
+.nav-item .nav-link{
+  color: #fff;
+  font-size:18px;
+  text-transform:uppercase;
+  height:82px;
+  line-height:64px;
+}
+.flare {
+  background:#eec718;
+}
+.flare a.nav-link {
+  color:#fff !important
+}
+.topbarElements > div:nth-of-type(1){
+  font-size:48px;
+  margin:10px 30px;
+  color:#5988e2;
+}
+@media screen and (min-width:1040px){
+  .flare { margin-right:-15px; }
+}
+@media screen and (max-width:1029px){
+  .navbar-nav {
+    margin-bottom:15px;
+    text-align:center
+  }
+  .nav-item {
+    background : rgba(255,255,255,0.1);
+    margin:2px;
   }
 }

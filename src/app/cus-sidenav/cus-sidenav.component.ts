@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
+
 @Component({
   selector: 'app-cus-sidenav',
   standalone: true,
@@ -15,4 +16,6 @@ export class CusSidenavComponent {
   toggleNav(): void {
     this.isOpen = !this.isOpen;
   }
+
+  
 }

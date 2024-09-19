@@ -1,1 +1,136 @@
-<p>viewhistory works!</p>
+<!-- <div class="container-fluid border-container p-3" style="margin-bottom: 50px; background-color: #fff; ">
+    <div class="input-group rounded mb-3 search-bar-container" style="max-width: 100%; width: 100%; max-width: 400px;">
+      <input type="search" class="form-control rounded search-input" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+      <span class="input-group-text border-0 search-addon" id="search-addon">
+        <i class="fas fa-search search-icon"></i>
+      </span>
+    </div>
+  
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>Tracking Number</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TRK001</td>
+            <td>2022-01-01</td>
+            <td>Pending</td>
+            <td>Cash</td>
+            <td>P500</td>
+            <td>
+              <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-eye" style="font-size: 16px;"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>TRK002</td>
+            <td>2022-01-05</td>
+            <td>Delivered</td>
+            <td>Card</td>
+            <td>P200</td>
+            <td>
+              <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-eye" style="font-size: 16px;"></i>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>TRK003</td>
+            <td>2022-01-10</td>
+            <td>In Transit</td>
+            <td>Online</td>
+            <td>P300</td>
+            <td>
+              <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
+                <i class="fas fa-eye" style="font-size: 16px;"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> -->
+  
+  <!-- <tbody>
+    @for(h of history; track h){
+      <tr>
+        <tr>
+          <td>{{ h.tracking_number }}</td>
+          <td>{{ h.datetime_of_payment }}</td>
+          <td>{{ h.transac_status }}</td>
+          <td>{{ h.mode_of_payment }}</td>
+          <td>{{ h.amount }}</td>
+          <td>
+          <button type="button" class="btn btn-transparent">
+            <i class="fas fa-eye" style="font-size: 16px;" (click)="showdet(h.transac_id)"></i>
+          </button>
+        </td>
+      </tr>
+    } -->
+ 
+  <div class="container mt-4">
+    <div class="table-responsive">
+        <!-- PROJECT TABLE -->
+        <table class="table table-hover table-striped project-list">
+            <thead>
+                <tr>
+                    <th>Tracking Number</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Amount</th>
+                    <!-- <th>Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+              @for(h of history; track h){
+                <tr>
+                  <td>{{ h.tracking_number }}</td>
+                  <td>{{ h.datetime_of_payment }}</td>
+                  <td>{{ h.transac_status }}</td>
+                  <td>{{ h.mode_of_payment }}</td>
+                  <td>{{ h.amount }}</td>
+                </tr>
+              }
+                <!-- <tr>
+                    <td><a href="#">E-Commerce Site</a></td>
+                    <td>24-05-2014</td>
+                    <td>30 days</td>
+                    <td>Pending</td>
+                    <td>$2000</td>
+                </tr>
+                <tr>
+                    <td><a href="#">Project 123GO</a></td>
+                    <td>20-09-2014</td>
+                    <td>50 days</td>
+                    <td>Paid</td>
+                    <td>$2500</td>
+                </tr>
+                <tr>
+                    <td><a href="#">Wordpress Theme</a></td>
+                    <td>05-10-2014</td>
+                    <td>40 days</td>
+                    <td>Pending</td>
+                    <td>$800</td>
+                </tr>
+                <tr>
+                    <td><a href="#">Redesign Landing Page</a></td>
+                    <td>15-11-2014</td>
+                    <td>30 days</td>
+                    <td>Paid</td>
+                    <td>$1200</td>
+                </tr> -->
+            </tbody>
+        </table>
+        <!-- END PROJECT TABLE -->
+    </div>
+</div>
