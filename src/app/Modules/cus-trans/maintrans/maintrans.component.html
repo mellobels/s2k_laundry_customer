@@ -1,1 +1,181 @@
+<<<<<<< HEAD
 <router-outlet></router-outlet>
+=======
+<div class="container-fluid border-container p-3" style="margin-bottom: 50px; background-color: #fff; ">
+  <div class="input-group rounded mb-3 search-bar-container" style="max-width: 100%; width: 100%; max-width: 400px;">
+    <input type="search" class="form-control rounded search-input" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0 search-addon" id="search-addon">
+      <i class="fas fa-search search-icon"></i>
+    </span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Tracking Number</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Payment</th>
+          <th>Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for(h of history; track h){
+          <tr>
+            <tr>
+              <td>{{ h.tracking_number }}</td>
+              <td>{{ h.datetime_of_payment }}</td>
+              <td>{{ h.transac_status }}</td>
+              <td>{{ h.mode_of_payment }}</td>
+              <td>{{ h.amount }}</td>
+              <td>
+              <button type="button" class="btn btn-transparent">
+                <i class="fas fa-eye" style="font-size: 16px;" (click)="showdet(h.transac_id)"></i>
+              </button>
+            </td>
+          </tr>
+        }
+        
+        <!-- <tr>
+          <td>TRK002</td>
+          <td>2022-01-05</td>
+          <td>Delivered</td>
+          <td>Card</td>
+          <td>P200</td>
+          <td>
+            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
+              <i class="fas fa-eye" style="font-size: 16px;"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>TRK003</td>
+          <td>2022-01-10</td>
+          <td>In Transit</td>
+          <td>Online</td>
+          <td>P300</td>
+          <td>
+            <button type="button" class="btn btn-transparent" data-toggle="modal" data-target="#myModal">
+              <i class="fas fa-eye" style="font-size: 16px;"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4">TOTAL:</td>
+          <td>P1000</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <!-- <h4 class="modal-title" id="myModalLabel">Purchase Receipt</h4> -->
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="tracking">
+            <div class="title">Tracking Order</div>
+        </div>
+          <div class="progress-track">
+            <ul id="progressbar">
+                <li class="step0 active " id="step1">Ordered</li>
+                <li class="step0 active text-center" id="step2">Shipped</li>
+                <li class="step0 active text-right" id="step3">On the way</li>
+                <li class="step0 text-right" id="step4">Delivered</li>
+            </ul>
+        </div> 
+          <div class="title">Purchase Receipt</div>
+          <div class="info">
+              <div class="row">
+                  <div class="col-6">
+                      <span id="heading">Date</span><br>
+                      <span id="details">2022-01-01</span>
+                  </div>
+                  <div class="col-6 text-right">
+                      <span id="heading">Tracking No.</span><br>
+                      <span id="details">TRK001</span>
+                  </div>
+              </div>      
+          </div>      
+          <div class="pricing">
+              <div class="row">
+                  <div class="col-9">
+                      <span id="name">Laundry:</span>  
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-9">
+                    <span id="name">Shirts</span>  
+                </div>
+                <div class="col-3 text-right">
+                  <span id="price">2pcs</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-9">
+                  <span id="name">Pants</span>  
+              </div>
+              <div class="col-3 text-right">
+                <span id="price">3pcs</span>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-9">
+                <span id="name">Jacket</span>  
+            </div>
+            <div class="col-3 text-right">
+              <span id="price">4pcs</span>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-9">
+              <span id="name">Weight</span>  
+          </div>
+          <div class="col-3 text-right">
+            <span id="price">30kg</span>
+        </div>
+        
+      </div>
+          </div>
+          <div class="total">
+            <div class="row">
+              <div class="col-9">SUBTOTAL</div>
+              <div class="col-3 text-right"><p>P450</p></div>
+          </div>
+          <div class="row">
+            <div class="col-9">SHIPPING</div>
+            <div class="col-3 text-right"><p>P50</p></div>
+        </div>
+              <div class="row">
+                  <div class="col-9">TOTAL</div> 
+                  <div class="col-3 text-right"><p>P500</p></div>
+              </div>
+          </div>
+          <!-- <div class="tracking">
+              <div class="title">Tracking Order</div>
+          </div> -->
+          <!-- <div class="progress-track">
+              <ul id="progressbar">
+                  <li class="step0 active " id="step1">Ordered</li>
+                  <li class="step0 active text-center" id="step2">Shipped</li>
+                  <li class="step0 active text-right" id="step3">On the way</li>
+                  <li class="step0 text-right" id="step4">Delivered</li>
+              </ul>
+          </div>        -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> e01d224bc8a9355ad4aec57efbbe6f9cbd90fe44

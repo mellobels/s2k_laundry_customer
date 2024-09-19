@@ -15,21 +15,22 @@ export class CusLoginComponent implements OnInit{
   constructor(private myserv: MyServiceService, private route: Router){}
     loginForm =new FormGroup({
       email: new FormControl(null),
-      password: new FormControl(null),
+      pass: new FormControl(null),
 })
 logdata: any;
   ngOnInit(): void {  
  }
  login(){
-  this.myserv.login(this.loginForm.value).subscribe((result:any)=>{
+  this.myserv.login(this.loginForm.value)
+.subscribe((result:any)=>{
     console.log(result);
     const token = result.token;
     console.log('Token: ', token);
     localStorage.setItem('authToken: ', token);
     if(token != null){
-          this.route.navigate(['/main/cusmainhome']);
+          this.route.navigate(['/main/cus-curtrans']);
           localStorage.setItem("cust_id",result.cust_id);
-    }else{
+        }else{
           console.log("ERROR login");
         }
       })}

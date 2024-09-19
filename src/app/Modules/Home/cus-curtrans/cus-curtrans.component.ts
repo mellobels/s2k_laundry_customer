@@ -1,38 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { MyServiceService } from '../../../my-service.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Component,ElementRef,inject,OnInit } from '@angular/core';
+import { PostService } from '../../../post.service';
+
 
 @Component({
   selector: 'app-cus-curtrans',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,ReactiveFormsModule,RouterModule,RouterLink],
+  imports: [CommonModule],
   templateUrl: './cus-curtrans.component.html',
   styleUrl: './cus-curtrans.component.css'
 })
 export class CusCurtransComponent implements OnInit{
 
-  constructor(private categ: MyServiceService){}
-  // categid: any;
-  categid: any;
+  post = inject(PostService);
   
-  ngOnInit(): void {
-    this.categ.displaycateg().subscribe((result: any) =>{
-      this.categid = result;
-      console.log(this.categid);
+  constructor(private elementRef: ElementRef){}
+
+  list: any;
+  trackingNumber:any;
+  customerdata:any
+  id = localStorage.getItem('cust_id');
+
+  
+  category:any;
+  qty:any;
+
+  laundrylist = this.post.post; 
+  
+  addToList() {
+    const laundryType = (document.getElementById('browser') as HTMLInputElement).value;
+    const count = (document.getElementById('weight') as HTMLInputElement).value;
+    if(laundryType && count != null){
+    const newItem = {
+      category: laundryType,
+      qty: count,
+    
+    };
+    this.laundrylist.push(newItem);
+    console.log(this.laundrylist);
+  }
+}
+
+removeFromList(item: any) {
+  const index = this.laundrylist.indexOf(item);
+  if (index !== -1) {
+    this.laundrylist.splice(index, 1);
+    console.log(this.laundrylist);
+  }
+}
+
+// ngAfterViewInit() {
+//   const modalElement = this.elementRef.nativeElement.querySelector('#myModal');
+//   modalElement.addEventListener('hidden.bs.modal', () => {
+//     this.laundrylist = []; // Reset the laundrylist array
+//     console.log(this.laundrylist);
+//   });
+// }
+  
+  ngOnInit(): void{
+    this.post.getlist().subscribe((data:any)=>{
+      this.list = data;
+      console.log(data);
+    })
+    this.post.getcustomerdata(this.id).subscribe((data:any)=>{
+      this.customerdata = data;
+      console.log(data);
     })
   }
-  
-  trackingNumber: string | null = null;
 
-  // Method to generate the tracking number by calling the service
-  generateTrackingNumber() {
-    this.categ.getTrackingNumber().subscribe((response: any) => {
-      this.trackingNumber = response.trackingNumber;
-    }, error => {
-      console.error('Error fetching tracking number', error); // Handle any errors
-    });
+  gentrack(){
+   const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
+   this.trackingNumber = `S2K-${randomNumber}`;
+   
+  }
+
+  insert(){
+    this.post.insertorder(this.id).subscribe((data:any)=>{
+      const a = data;
+      console.log(a);
+      console.log(data);
+      
+    })
+
   }
 
 }
