@@ -1,17 +1,6 @@
 .heading1 {
     font-size: 16px;
     color: #ffffff;
-<<<<<<< HEAD
-}
-
-.btn {
-    background-color: #5988E2;
-    color: #fff;
-}
-.browse-button {
-    background-color: #194280;
-    color: #fff;
-=======
   }
   .btn{
     background-color: #5988e2;
@@ -116,7 +105,7 @@
     text-align: center;
   }
   
-  .status.delivered {
+  .status.received {
     background-color: #86e49d;
     color: #006b21;
   }
@@ -149,7 +138,6 @@
   .browse-button {
     background-color: #194280;
     color: #ffffff;
->>>>>>> e01d224bc8a9355ad4aec57efbbe6f9cbd90fe44
     cursor: pointer;
     transition: background-color 0.3s ease;
 }

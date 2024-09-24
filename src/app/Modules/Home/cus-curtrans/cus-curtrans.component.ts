@@ -1,18 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component,ElementRef,inject,OnInit } from '@angular/core';
-import { PostService } from '../../../post.service';
+import { RouterLink } from '@angular/router';
+import { MyServiceService } from '../../../my-service.service';
 
 
 @Component({
   selector: 'app-cus-curtrans',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './cus-curtrans.component.html',
   styleUrl: './cus-curtrans.component.css'
 })
 export class CusCurtransComponent implements OnInit{
 
-  post = inject(PostService);
+  post = inject(MyServiceService);
   
   constructor(private elementRef: ElementRef){}
 
@@ -25,29 +26,29 @@ export class CusCurtransComponent implements OnInit{
   category:any;
   qty:any;
 
-  laundrylist = this.post.post; 
+  // laundrylist = this.post.post; 
   
-  addToList() {
-    const laundryType = (document.getElementById('browser') as HTMLInputElement).value;
-    const count = (document.getElementById('weight') as HTMLInputElement).value;
-    if(laundryType && count != null){
-    const newItem = {
-      category: laundryType,
-      qty: count,
+//   addToList() {
+//     const laundryType = (document.getElementById('browser') as HTMLInputElement).value;
+//     const count = (document.getElementById('weight') as HTMLInputElement).value;
+//     if(laundryType && count != null){
+//     const newItem = {
+//       category: laundryType,
+//       qty: count,
     
-    };
-    this.laundrylist.push(newItem);
-    console.log(this.laundrylist);
-  }
-}
+//     };
+//     this.laundrylist.push(newItem);
+//     console.log(this.laundrylist);
+//   }
+// }
 
-removeFromList(item: any) {
-  const index = this.laundrylist.indexOf(item);
-  if (index !== -1) {
-    this.laundrylist.splice(index, 1);
-    console.log(this.laundrylist);
-  }
-}
+// removeFromList(item: any) {
+//   const index = this.laundrylist.indexOf(item);
+//   if (index !== -1) {
+//     this.laundrylist.splice(index, 1);
+//     console.log(this.laundrylist);
+//   }
+// }
 
 // ngAfterViewInit() {
 //   const modalElement = this.elementRef.nativeElement.querySelector('#myModal');
@@ -58,14 +59,14 @@ removeFromList(item: any) {
 // }
   
   ngOnInit(): void{
-    this.post.getlist().subscribe((data:any)=>{
-      this.list = data;
+    this.post.displaycateg().subscribe((data:any)=>{
+      this.category = data;
       console.log(data);
     })
-    this.post.getcustomerdata(this.id).subscribe((data:any)=>{
-      this.customerdata = data;
-      console.log(data);
-    })
+    // this.post.getcustomerdata(this.id).subscribe((data:any)=>{
+    //   this.customerdata = data;
+    //   console.log(data);
+    // })
   }
 
   gentrack(){
@@ -74,14 +75,14 @@ removeFromList(item: any) {
    
   }
 
-  insert(){
-    this.post.insertorder(this.id).subscribe((data:any)=>{
-      const a = data;
-      console.log(a);
-      console.log(data);
+  // insert(){
+  //   this.post.insertorder(this.id).subscribe((data:any)=>{
+  //     const a = data;
+  //     console.log(a);
+  //     console.log(data);
       
-    })
+  //   })
 
-  }
+  // }
 
 }

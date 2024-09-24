@@ -52,10 +52,13 @@
 
     <div class="footer">
         <div class="row">
-            <div class="col-3 d-flex">
-                <img class="img-fluid" src="assets/s2klogo.png" style="margin-left: 70px; margin-top: 5px;">
-            </div>
-            <div class="col-9 fs-6 mt-1">Want any help? Please contact us</div>
+            <form method="post" enctype="multipart/form-data">
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fa fa-cloud-upload"></i> Payment
+                </label>
+                <input type="file" id="file-upload" name="files" multiple />
+                <span id="file-chosen">No file chosen</span>
+            </form>
         </div>
     </div>
 </div>

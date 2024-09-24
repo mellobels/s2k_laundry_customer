@@ -1,27 +1,19 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-=======
+
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../../post.service';
-import { Router} from '@angular/router';
->>>>>>> e01d224bc8a9355ad4aec57efbbe6f9cbd90fe44
+import { Router, RouterOutlet} from '@angular/router';
+import { MyServiceService } from '../../../my-service.service';
 
 @Component({
   selector: 'app-maintrans',
   standalone: true,
-<<<<<<< HEAD
-  imports: [RouterOutlet],
-=======
-  imports: [CommonModule],
->>>>>>> e01d224bc8a9355ad4aec57efbbe6f9cbd90fe44
+  imports: [RouterOutlet,CommonModule],
   templateUrl: './maintrans.component.html',
   styleUrl: './maintrans.component.css'
 })
 export class MaintransComponent implements OnInit{
 
-  constructor(private post:PostService, private router:Router){}
+  constructor(private post:MyServiceService, private router:Router){}
 
   id = localStorage.getItem("cust_id");
   history:any;
@@ -32,16 +24,16 @@ export class MaintransComponent implements OnInit{
     })
    
   }
-  showdet(tid:any){
-    this.post.showdetail(tid).subscribe((result:any)=>{
-      console.log(result);
+  // showdet(tid:any){
+  //   this.post.showdetail(tid).subscribe((result:any)=>{
+  //     console.log(result);
      
-      console.log('About to navigate to ./viewhistory');
-      this.router.navigate(['/main/maintrans/sample/viewhistory', tid]);
-      console.log('Navigation complete');
+  //     console.log('About to navigate to ./viewhistory');
+  //     this.router.navigate(['/main/maintrans/sample/viewhistory', tid]);
+  //     console.log('Navigation complete');
       
-    })
-  }
+  //   })
+  // }
 
 
 }
