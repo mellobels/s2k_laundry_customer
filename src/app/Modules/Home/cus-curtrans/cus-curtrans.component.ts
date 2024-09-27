@@ -74,6 +74,15 @@ export class CusCurtransComponent implements OnInit{
    this.trackingNumber = `S2K-${randomNumber}`;
    
   }
+  updateItem() {
+    // Implement logic to update the item based on tracking number
+    console.log();
+  }
+
+  viewItem() {
+    // Implement logic to view details of the item based on tracking number
+    console.log();
+  }
 
   // insert(){
   //   this.post.insertorder(this.id).subscribe((data:any)=>{

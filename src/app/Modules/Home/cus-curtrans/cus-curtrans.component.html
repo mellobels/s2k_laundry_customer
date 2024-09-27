@@ -1,89 +1,103 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-      <div class="col-12 col-md-8">
-          <div class="card shadow">
-              <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                  <h6 class="m-0">New Transaction
-                      <i class="fa fa-plus-circle mx-1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer;"></i>
-                  </h6>
-                  <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Search" style="width: 200px;">
-              </div>
-              <div class="card-body">     
-                  <div class="table-responsive">
-                      <table class="table table-borderless table-hover" id="trackingTable">
-                          <thead>
-                              <tr>
-                                  <th scope="col"></th>
-                                  <th scope="col">Tracking #</th>
-                                  <th scope="col">Laundry Item</th>
-                                  <th scope="col">Qty</th>
-                                  <th scope="col">Weight</th>
-                                  <th scope="col">Date</th>
-                                  <th scope="col">Price</th>
-                                  <th scope="col">Track your laundry</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr [routerLink]="['/main/cusmainhome/homemain/history']">
-                                  <td></td>
-                                  <td>S2K-1082142851883</td>
-                                  <td>Assorted</td>
-                                  <td>2 pcs</td>
-                                  <td></td>
-                                  <td>12/12/2024</td>
-                                  <td>65.00</td>
-                                  <td>
-                                      <p class="status pending">pending</p>
-                                  </td>
-                              </tr>
-                              <tr [routerLink]="['/main/cusmainhome/homemain/history']">
-                                  <td></td>
-                                  <td>S2K-509560161158</td>
-                                  <td>Carpet</td>
-                                  <td>1 pc</td>
-                                  <td></td>
-                                  <td>12/12/2024</td>
-                                  <td>65.00</td>
-                                  <td>
-                                      <p class="status received">recieved</p>
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
+    <!-- Left Column for Transactions -->
+    <div class="col-12 col-md-8 mb-3">
+      <div class="card shadow">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <h6 class="m-0">New Transaction
+            <i class="fa fa-plus-circle mx-1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer;"></i>
+          </h6>
+          <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Search" style="width: 200px;">
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-borderless" id="trackingTable">
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Tracking #</th>
+                  <th scope="col">Laundry Item</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Weight</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Track your laundry</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [routerLink]="['/main/cusmainhome/homemain/history']">
+                  <td></td>
+                  <td>S2K-1082142851883</td>
+                  <td>Assorted</td>
+                  <td>2 pcs</td>
+                  <td></td>
+                  <td>12/12/2024</td>
+                  <td>65.00</td>
+                  <td>
+                    <p class="status pending">pending</p>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
+                    <button class="btn btn-sm " (click)="viewItem()">View</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>S2K-509560161158</td>
+                  <td>Carpet</td>
+                  <td>1 pc</td>
+                  <td></td>
+                  <td>12/12/2024</td>
+                  <td>65.00</td>
+                  <td>
+                    <p class="status received">received</p>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
+                    <button class="btn btn-sm" (click)="viewItem()">View</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+        </div>
       </div>
-      <div class="col-12 col-md-4">
-          <div class="card shadow mb-4">
-              <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center">
-                      <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
-                      <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
-                  </div>
-              </div>
-              <div class="card-body">
-                  <table class="table mb-0">
-                      <thead>
-                          <tr>
-                              <th scope="col" class="pl-0">Category</th>
-                              <th scope="col" class="text-right">Label</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          @for (c of category; track c.categ_id) {
-                              <tr>
-                                  <td class="pl-0">{{ c.category }}</td>
-                                  <td class="pr-0 text-right">
-                                      <span class="badge rounded-pill" style="background-color: #5988E2;">{{ c.price }}/kg</span>
-                                  </td>
-                              </tr>
-                          }
-                      </tbody>
-                  </table>
-              </div>
+    </div>
+
+    <!-- Right Column for Category and Pricing -->
+    <div class="col-12 col-md-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+            <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
           </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col" class="pl-0">Category</th>
+                  <th scope="col" class="text-right">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (c of category; track c.categ_id) {
+                <tr>
+                  <td class="pl-0">{{c.category}}</td>
+                  <td class="pr-0 text-right">
+                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.price}}/kg</span>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
 </div>
 
@@ -92,113 +106,150 @@
 
 
 
-  <!-- The Modal -->
-  <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- Added modal-lg for larger modal -->
-      <div class="modal-content">
-  
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title"><strong>{{ trackingNumber }}</strong></h4>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- The Modal -->
+<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- Added modal-lg for larger modal -->
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="d-flex">
+          <!-- <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Customer</span>!</h5> -->
         </div>
-  
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
       <!-- Modal Body -->
-<div class="modal-body">
-    <div class="container-fluid">
-      <form action="" id="manage-laundry">
-        <div class="col-lg-12">
-          <input type="hidden" name="id" value="">
-          <div class="row">
-            <!-- Customer Name -->
-            <div class="col-12 col-md-6 mb-3">
-              <div class="form-group">
-                <label for="customer_name" class="control-label">Customer Name</label>
-                <input type="text" class="form-control" name="customer_name" id="customer_name" value="">
+      <div class="modal-body">
+        <div class="container-fluid">
+          <form action="" id="manage-laundry">
+            <div class="col-lg-12">
+              <!-- Tracking Number Row -->
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <div class="form-group">
+                    <label for="trackingNumber" class="control-label"><strong>Tracking Number</strong></label>
+                    <h4 class="modal-title"><strong>{{ trackingNumber }}</strong></h4>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <strong>Billing address</strong>
+                  <address>
+                    <strong>John Doe</strong><br>
+                    1355 Market St, Suite 900<br>
+                    San Francisco, CA 94103<br>
+                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                  </address>
+                </div>
               </div>
-            </div>
-            <!-- Contact Number -->
-            <div class="col-12 col-md-6 mb-3">
-              <div class="form-group">
-                <label for="customer_num" class="control-label">Contact number</label>
-                <input type="text" class="form-control" name="customer_num" id="customer_num" value="">
+
+              <hr>
+
+              <!-- Laundry Type and Count Row -->
+              <div class="row">
+                <!-- Laundry Type -->
+                <div class="col-12 col-md-4 mb-3">
+                  <div class="form-group">
+                    <label for="laundryType" class="control-label">Laundry Type</label>
+                    <select class="form-control" id="laundryType" name="laundryType">
+                      <option value="" disabled selected>Select Laundry Type</option>
+                      <option value="Shirt/Upper">Shirt/Upper</option>
+                      <option value="Jacket">Jacket</option>
+                      <option value="Shorts">Shorts</option>
+                      <option value="Pants">Pants</option>
+                      <option value="Towel">Towel</option>
+                      <option value="Bed Sheets">Bed Sheets</option>
+                      <option value="Blanket">Blanket</option>
+                      <option value="Comforter">Comforter</option>
+                      <option value="Curtains">Curtains</option>
+                      <option value="Pillow Case">Pillow Case</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Count -->
+                <div class="col-12 col-md-4 mb-3">
+                  <div class="form-group">
+                    <label for="weight" class="control-label">Count</label>
+                    <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
+                  </div>
+                </div>
+
+                <!-- Add to List Button -->
+                <div class="col-12 col-md-4 d-flex align-items-end mb-3">
+                  <div class="form-group w-100">
+                    <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <!-- Laundry Type -->
-            <div class="col-12 col-md-4 mb-3">
-              <div class="form-group">
-                <label for="browser" class="control-label">Laundry Type</label>
-                <input class="form-control" list="browsers" id="browser" name="browser">
-                <datalist id="browsers">
-                  <option value="Shirt/Upper">
-                  <option value="Jacket">
-                  <option value="Shorts">
-                  <option value="Pants">
-                  <option value="Towel">
-                  <option value="Bed Sheets">
-                  <option value="Blanket">
-                  <option value="Comforter">
-                  <option value="Curtains">
-                  <option value="Pillow Case">
-                </datalist>
+
+              <!-- Services (Hand Wash, Press) -->
+              <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                  <div class="form-group">
+                    <label for="services" class="control-label">Services</label><br>
+                    <div class="d-flex">
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" name="serviceType" id="handWash" value="handWash">
+                        <label class="form-check-label" for="handWash">Hand Wash</label>
+                      </div>
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" name="serviceType" id="press" value="press">
+                        <label class="form-check-label" for="press">Press</label>
+                      </div>
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="rush">
+                        <label class="form-check-label" for="rush">Rush Jobs</label>
+                      </div>
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="pick">
+                        <label class="form-check-label" for="pick-up">Pick-up</label>
+                      </div>
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="deliver">
+                        <label class="form-check-label" for="delivery">Delivery</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <!-- Count -->
-            <div class="col-12 col-md-4 mb-3">
-              <div class="form-group">
-                <label for="weight" class="control-label">Count</label>
-                <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
+
+              <!-- Table for List Items -->
+              <div class="row">
+                <div class="col-12">
+                  <table class="table table-bordered" id="list">
+                    <colgroup>
+                      <col width="30%">
+                      <col width="15%">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th class="text-center">Category</th>
+                        <th class="text-center">Qty</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Rows will be dynamically added here -->
+                      <tr>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
+
+              <hr>
+
             </div>
-            <!-- Add to List Button -->
-            <div class="col-12 col-md-4 d-flex align-items-end mb-3">
-              <div class="form-group w-100">
-                <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
-              </div>
-            </div>
-          </div>
-          <!-- Table for List Items -->
-          <div class="row">
-            <div class="col-12">
-              <table class="table table-bordered" id="list">
-                <colgroup>
-                  <col width="30%">
-                  <col width="15%">
-                  <col width="25%">
-                  <col width="25%">
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th class="text-center">Category</th>
-                    <th class="text-center">Qty</th>
-                    <!-- <th class="text-center">Unit Price</th>
-                    <th class="text-center">Amount</th> -->
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Rows will be added dynamically -->
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <hr>
+          </form>
         </div>
-      </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+      </div>
     </div>
   </div>
-  
-  <!-- Modal Footer -->
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
-  </div>
- 
-  
+</div>
