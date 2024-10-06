@@ -26,7 +26,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr [routerLink]="['/main/cusmainhome/homemain/history']">
+                @for (item of trans; track item.Transac_ID) {
+                <tr >
+                  <td></td>
+                  <td>{{item.Tracking_number}}</td>
+                  <td>{{item.Category}}</td>
+                  <td>{{item.Qty}}</td>
+                  <td>{{item.Weight}}</td>
+                  <td>{{item.Transac_date}}</td>
+                  <td>{{item.Per_kilograms}}</td>
+                  <td>
+                    <p class="status pending">pending</p>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
+                    <button class="btn btn-sm " (click)="viewItem()" [routerLink]="['/main/cusmainhome/homemain/history']">View</button>
+                  </td>
+                </tr>
+              }
+                <!-- <tr [routerLink]="['/main/cusmainhome/homemain/history']">
                   <td></td>
                   <td>S2K-1082142851883</td>
                   <td>Assorted</td>
@@ -57,7 +75,7 @@
                     <button class="btn btn-sm " (click)="updateItem()">Update</button>
                     <button class="btn btn-sm" (click)="viewItem()">View</button>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
@@ -84,11 +102,11 @@
                 </tr>
               </thead>
               <tbody>
-                @for (c of category; track c.categ_id) {
+                @for (c of categ; track c.Categ_id) {
                 <tr>
-                  <td class="pl-0">{{c.category}}</td>
+                  <td class="pl-0">{{c.Category}}</td>
                   <td class="pr-0 text-right">
-                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.price}}/kg</span>
+                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
                   </td>
                 </tr>
                 }
@@ -122,7 +140,7 @@
       <!-- Modal Body -->
       <div class="modal-body">
         <div class="container-fluid">
-          <form action="" id="manage-laundry">
+          <form [formGroup]="newtransac" id="manage-laundry">
             <div class="col-lg-12">
               <!-- Tracking Number Row -->
               <div class="row">
@@ -151,18 +169,11 @@
                 <div class="col-12 col-md-4 mb-3">
                   <div class="form-group">
                     <label for="laundryType" class="control-label">Laundry Type</label>
-                    <select class="form-control" id="laundryType" name="laundryType">
+                    <select class="form-control" id="laundryType" formControlName="laundryType">
                       <option value="" disabled selected>Select Laundry Type</option>
-                      <option value="Shirt/Upper">Shirt/Upper</option>
-                      <option value="Jacket">Jacket</option>
-                      <option value="Shorts">Shorts</option>
-                      <option value="Pants">Pants</option>
-                      <option value="Towel">Towel</option>
-                      <option value="Bed Sheets">Bed Sheets</option>
-                      <option value="Blanket">Blanket</option>
-                      <option value="Comforter">Comforter</option>
-                      <option value="Curtains">Curtains</option>
-                      <option value="Pillow Case">Pillow Case</option>
+                      @for(c of categ; track c.Categ_ID){
+                        <option [value]="c.Category">{{c.Category}}</option>
+                      }
                     </select>
                   </div>
                 </div>
@@ -171,14 +182,14 @@
                 <div class="col-12 col-md-4 mb-3">
                   <div class="form-group">
                     <label for="weight" class="control-label">Count</label>
-                    <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
+                    <input type="number" step="any" min="1"  class="form-control text-right" id="weight" formControlName="count">
                   </div>
                 </div>
 
                 <!-- Add to List Button -->
                 <div class="col-12 col-md-4 d-flex align-items-end mb-3">
                   <div class="form-group w-100">
-                    <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list"><i class="fa fa-plus"></i> Add to List</button>
+                    <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
                   </div>
                 </div>
               </div>
@@ -190,23 +201,23 @@
                     <label for="services" class="control-label">Services</label><br>
                     <div class="d-flex">
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="serviceType" id="handWash" value="handWash">
+                        <input class="form-check-input" type="radio" formControlName="serviceType"  id="handWash" value="handWash">
                         <label class="form-check-label" for="handWash">Hand Wash</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="serviceType" id="press" value="press">
+                        <input class="form-check-input" type="radio" formControlName="serviceType" id="press" value="press">
                         <label class="form-check-label" for="press">Press</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="rush">
+                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="rush">
                         <label class="form-check-label" for="rush">Rush Jobs</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="pick">
+                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="pick">
                         <label class="form-check-label" for="pick-up">Pick-up</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" name="serviceType" id="both" value="deliver">
+                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="deliver">
                         <label class="form-check-label" for="delivery">Delivery</label>
                       </div>
                     </div>
@@ -224,16 +235,18 @@
                     </colgroup>
                     <thead>
                       <tr>
-                        <th class="text-center">Category</th>
+                        <th class="text-center" >Category</th>
                         <th class="text-center">Qty</th>
                       </tr>
                     </thead>
                     <tbody>
                       <!-- Rows will be dynamically added here -->
-                      <tr>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      @for(l of laundrylist; track l.Categ_ID ){
+                        <tr>
+                          <td class="text-center">{{l.category}}</td>
+                          <td class="text-center">{{l.qty}}</td>
+                        </tr>
+                      }
                     </tbody>
                   </table>
                 </div>
@@ -248,7 +261,7 @@
 
       <!-- Modal Footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="insert()">Save</button>
       </div>
     </div>
   </div>

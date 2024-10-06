@@ -2,18 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component,ElementRef,inject,OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MyServiceService } from '../../../my-service.service';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-cus-curtrans',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,FormsModule,ReactiveFormsModule],
   templateUrl: './cus-curtrans.component.html',
   styleUrl: './cus-curtrans.component.css'
 })
 export class CusCurtransComponent implements OnInit{
 
   post = inject(MyServiceService);
+  categ: any;
+  trans: any;
   
   constructor(private elementRef: ElementRef){}
 
@@ -26,21 +29,27 @@ export class CusCurtransComponent implements OnInit{
   category:any;
   qty:any;
 
-  // laundrylist = this.post.post; 
+  laundrylist = this.post.post; 
+
+  newtransac = new FormGroup({
+    laundryType: new FormControl(null),
+    count: new FormControl(null),
+    serviceType: new FormControl(null),
+    Categ: new FormControl(null)
+  })
   
-//   addToList() {
-//     const laundryType = (document.getElementById('browser') as HTMLInputElement).value;
-//     const count = (document.getElementById('weight') as HTMLInputElement).value;
-//     if(laundryType && count != null){
-//     const newItem = {
-//       category: laundryType,
-//       qty: count,
-    
-//     };
-//     this.laundrylist.push(newItem);
-//     console.log(this.laundrylist);
-//   }
-// }
+  addToList() {
+    const laundryType = (document.getElementById('laundryType') as HTMLInputElement).value;
+    const count = (document.getElementById('weight') as HTMLInputElement).value;
+    if(laundryType && count != null){
+      const newItem = {
+        category: laundryType,
+        qty: count,
+      };
+      this.laundrylist.push(newItem);
+      console.log(this.laundrylist);
+    }
+  }
 
 // removeFromList(item: any) {
 //   const index = this.laundrylist.indexOf(item);
@@ -58,15 +67,27 @@ export class CusCurtransComponent implements OnInit{
 //   });
 // }
   
+fetchransactions(){
+  this.post.display().subscribe((data:any)=>{
+    this.trans = data.transaction;
+    console.log(this.trans);
+  })
+}
   ngOnInit(): void{
-    this.post.displaycateg().subscribe((data:any)=>{
-      this.category = data;
-      console.log(data);
+    this.post.displaytransaction().subscribe((data:any)=>{
+      this.customerdata = data.transactions;
+      console.log(this.customerdata);
     })
-    // this.post.getcustomerdata(this.id).subscribe((data:any)=>{
-    //   this.customerdata = data;
-    //   console.log(data);
-    // })
+    this.fetchransactions();
+    this.post.displaycategory().subscribe((data:any)=>{
+      this.categ = data;
+      console.log(this.categ);
+    })
+    this.post.display().subscribe((data:any)=>{
+      this.trans = data.transaction;
+      this.fetchransactions();
+      console.log(this.trans);
+    })
   }
 
   gentrack(){
@@ -84,14 +105,16 @@ export class CusCurtransComponent implements OnInit{
     console.log();
   }
 
-  // insert(){
-  //   this.post.insertorder(this.id).subscribe((data:any)=>{
-  //     const a = data;
-  //     console.log(a);
-  //     console.log(data);
-      
-  //   })
+  insert(){
+    console.log(this.newtransac.value)
+    // this.post.insertorder(this.id, this.trackingNumber, this.qty).subscribe((data:any)=>{
+    //   const a = data;
+    //   console.log(a);
+    //   console.log(data);
+    //   this.laundrylist = [];
+    //   this.fetchransactions();
+    // })
 
-  // }
+  }
 
 }

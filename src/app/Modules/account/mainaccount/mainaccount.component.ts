@@ -30,21 +30,21 @@ export class MainaccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.myserv.getcustomerdata(this.custid).subscribe((data:any)=>{
-    //   this.customerData = data;
-    //   if (data && data.length > 0) {
-    //     data.forEach((customer: any) => {
-    //       this.profileform.setValue({
-    //         cid: customer.cust_id,
-    //         fname: customer.cust_fname,
-    //         lname: customer.cust_lname,
-    //         mname: customer.cust_mname,
-    //         phonenum: customer.cust_phoneno,
-    //         address: customer.cust_address,
-    //         email: customer.cust_email,
-    //         })
-    //     });}
-    //   });  
+    this.myserv.getcustomerdata(this.custid).subscribe((data:any)=>{
+      this.customerData = data;
+      if (data && data.length > 0) {
+        data.forEach((customer: any) => {
+          this.profileform.setValue({
+            cid: customer.cust_id,
+            fname: customer.cust_fname,
+            lname: customer.cust_lname,
+            mname: customer.cust_mname,
+            phonenum: customer.cust_phoneno,
+            address: customer.cust_address,
+            email: customer.cust_email,
+            })
+        });}
+      });  
     
   }
 
