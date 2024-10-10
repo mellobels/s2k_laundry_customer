@@ -7,11 +7,11 @@
           <h6 class="m-0">New Transaction
             <i class="fa fa-plus-circle mx-1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer;"></i>
           </h6>
-          <input type="text" id="searchInput" class="form-control" onkeyup="searchTable()" placeholder="Search" style="width: 200px;">
+          <input type="text" id="searchInput" class="form-control search-input" onkeyup="searchTable()" placeholder="Search">
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-borderless" id="trackingTable">
+            <table class="table table-borderless table-scroll" id="trackingTable">
               <thead>
                 <tr>
                   <th scope="col"></th>
@@ -21,61 +21,36 @@
                   <th scope="col">Weight</th>
                   <th scope="col">Date</th>
                   <th scope="col">Price</th>
-                  <th scope="col">Track your laundry</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                @for (item of trans; track item.Transac_ID) {
-                <tr >
+              <tbody class="">
+                @for (item of trans; track item.Tracking_number) {
+                <tr>
                   <td></td>
                   <td>{{item.Tracking_number}}</td>
                   <td>{{item.Category}}</td>
-                  <td>{{item.Qty}}</td>
-                  <td>{{item.Weight}}</td>
+                  <td>{{item.totalQty}}</td>
+                  <td>{{item.totalWeight}}</td>
                   <td>{{item.Transac_date}}</td>
-                  <td>{{item.Per_kilograms}}</td>
+                  <td>{{item.totalprice}}</td>
                   <td>
                     <p class="status pending">pending</p>
                   </td>
                   <td>
-                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
-                    <button class="btn btn-sm " (click)="viewItem()" [routerLink]="['/main/cusmainhome/homemain/history']">View</button>
-                  </td>
+                    <button class="btn custom-action-btn custom-update-btn" (click)="updateItem()">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn custom-action-btn custom-view-btn" (click)="viewItem()" [routerLink]="['/main/cusmainhome/homemain/history']">
+                      <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
+                      <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                  </td>                  
                 </tr>
-              }
-                <!-- <tr [routerLink]="['/main/cusmainhome/homemain/history']">
-                  <td></td>
-                  <td>S2K-1082142851883</td>
-                  <td>Assorted</td>
-                  <td>2 pcs</td>
-                  <td></td>
-                  <td>12/12/2024</td>
-                  <td>65.00</td>
-                  <td>
-                    <p class="status pending">pending</p>
-                  </td>
-                  <td>
-                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
-                    <button class="btn btn-sm " (click)="viewItem()">View</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>S2K-509560161158</td>
-                  <td>Carpet</td>
-                  <td>1 pc</td>
-                  <td></td>
-                  <td>12/12/2024</td>
-                  <td>65.00</td>
-                  <td>
-                    <p class="status received">received</p>
-                  </td>
-                  <td>
-                    <button class="btn btn-sm " (click)="updateItem()">Update</button>
-                    <button class="btn btn-sm" (click)="viewItem()">View</button>
-                  </td>
-                </tr> -->
+                }
               </tbody>
             </table>
           </div>
@@ -97,15 +72,15 @@
             <table class="table mb-0">
               <thead>
                 <tr>
-                  <th scope="col" class="pl-0">Category</th>
+                  <th scope="col">Category</th>
                   <th scope="col" class="text-right">Price</th>
                 </tr>
               </thead>
               <tbody>
-                @for (c of categ; track c.Categ_id) {
+                @for (c of categ; track c.Categ_ID) {
                 <tr>
-                  <td class="pl-0">{{c.Category}}</td>
-                  <td class="pr-0 text-right">
+                  <td>{{c.Category}}</td>
+                  <td class="text-right">
                     <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
                   </td>
                 </tr>
@@ -119,39 +94,28 @@
   </div>
 </div>
 
-  
-
-
-
-
 <!-- The Modal -->
 <div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <!-- Added modal-lg for larger modal -->
     <div class="modal-content">
-      <!-- Modal Header -->
       <div class="modal-header">
-        <div class="d-flex">
-          <!-- <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Customer</span>!</h5> -->
-        </div>
+        <div class="d-flex"></div>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
-      <!-- Modal Body -->
       <div class="modal-body">
         <div class="container-fluid">
           <form [formGroup]="newtransac" id="manage-laundry">
             <div class="col-lg-12">
-              <!-- Tracking Number Row -->
               <div class="row">
                 <div class="col-12 col-md-6 mb-3">
                   <div class="form-group">
                     <label for="trackingNumber" class="control-label"><strong>Tracking Number</strong></label>
+                    <input type="hidden" [value]="trackingNumber" formControlName="Tracking_number">
                     <h4 class="modal-title"><strong>{{ trackingNumber }}</strong></h4>
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <strong>Billing address</strong>
+                  <strong>Billing address</strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <address>
                     <strong>John Doe</strong><br>
                     1355 Market St, Suite 900<br>
@@ -160,40 +124,31 @@
                   </address>
                 </div>
               </div>
-
               <hr>
-
-              <!-- Laundry Type and Count Row -->
               <div class="row">
-                <!-- Laundry Type -->
                 <div class="col-12 col-md-4 mb-3">
                   <div class="form-group">
                     <label for="laundryType" class="control-label">Laundry Type</label>
-                    <select class="form-control" id="laundryType" formControlName="laundryType">
+                    <select class="form-control" id="laundryType" formControlName="Category">
                       <option value="" disabled selected>Select Laundry Type</option>
                       @for(c of categ; track c.Categ_ID){
-                        <option [value]="c.Category">{{c.Category}}</option>
+                        <option [value]="c.Categ_ID">{{c.Category}}</option>
                       }
                     </select>
                   </div>
                 </div>
-
-                <!-- Count -->
                 <div class="col-12 col-md-4 mb-3">
                   <div class="form-group">
                     <label for="weight" class="control-label">Count</label>
-                    <input type="number" step="any" min="1"  class="form-control text-right" id="weight" formControlName="count">
+                    <input type="number" step="any" min="1" class="form-control text-right" id="weight" formControlName="Qty">
                   </div>
                 </div>
-
-                <!-- Add to List Button -->
                 <div class="col-12 col-md-4 d-flex align-items-end mb-3">
                   <div class="form-group w-100">
                     <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
                   </div>
                 </div>
               </div>
-
               <!-- Services (Hand Wash, Press) -->
               <div class="row">
                 <div class="col-12 col-md-6 mb-3">
@@ -201,31 +156,29 @@
                     <label for="services" class="control-label">Services</label><br>
                     <div class="d-flex">
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="serviceType"  id="handWash" value="handWash">
+                        <input class="form-check-input" type="radio" formControlName="Transac_status"  id="handWash" value="handWash">
                         <label class="form-check-label" for="handWash">Hand Wash</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="serviceType" id="press" value="press">
+                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="press" value="press">
                         <label class="form-check-label" for="press">Press</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="rush">
+                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="rush">
                         <label class="form-check-label" for="rush">Rush Jobs</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="pick">
+                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="pick">
                         <label class="form-check-label" for="pick-up">Pick-up</label>
                       </div>
                       <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="serviceType" id="both" value="deliver">
+                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="deliver">
                         <label class="form-check-label" for="delivery">Delivery</label>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <!-- Table for List Items -->
               <div class="row">
                 <div class="col-12">
                   <table class="table table-bordered" id="list">
@@ -235,31 +188,26 @@
                     </colgroup>
                     <thead>
                       <tr>
-                        <th class="text-center" >Category</th>
+                        <th class="text-center">Category</th>
                         <th class="text-center">Qty</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- Rows will be dynamically added here -->
-                      @for(l of laundrylist; track l.Categ_ID ){
+                      @for(l of laundrylist; track l.category ){
                         <tr>
-                          <td class="text-center">{{l.category}}</td>
-                          <td class="text-center">{{l.qty}}</td>
+                          <td class="text-center">{{l.Category}}</td>
+                          <td class="text-center">{{l.Qty}}</td>
                         </tr>
                       }
                     </tbody>
                   </table>
                 </div>
               </div>
-
               <hr>
-
             </div>
           </form>
         </div>
       </div>
-
-      <!-- Modal Footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="insert()">Save</button>
       </div>

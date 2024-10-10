@@ -15,6 +15,7 @@ export class HistoryComponent implements OnInit{
   imagePreview: any;
 
 
+
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0] as File;
     this.previewImage();

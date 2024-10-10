@@ -22,6 +22,12 @@ export class MyServiceService {
     return this.http.get(this.Apiurl + 'display');
   }
 
+  addtrans(data: any){
+    return this.http.post(this.Apiurl + 'addtrans', data);
+  }
+  updatetrans(data: any){
+    return this.http.get(`${this.Apiurl}cancelTrans/${data}`)
+  }
 
   insertorder(idata:any,trackingNumber:any,qty:any){
     const data = {
@@ -33,9 +39,10 @@ export class MyServiceService {
     console.log(data);
     return this.http.post(this.url + 'insertorder.php', JSON.stringify(data));
   }
-  checklogin(log: any){
-    return this.http.post(this.url + 's2klogin.php',JSON.stringify(log));
-  }
+  
+  // checklogin(log: any){
+  //   return this.http.post(this.url + 's2klogin.php',JSON.stringify(log));
+  // }
   login(data: any){
     return this.http.post(this.Apiurl + 'login',data);
   }
@@ -49,15 +56,9 @@ export class MyServiceService {
   showhis(gdata:any){
     return this.http.get(this.url + 'get_history.php?cust_id='+ gdata);
   }
-  displaytransaction() {
-    return this.http.get(this.Apiurl + 'display');
-  }
-
-  
-
-
-  
-
+  // displaytransaction() {
+  //   return this.http.get(this.Apiurl + 'display');
+  // }
   showdetail(tid:any){
     return this.http.get(this.url + 'showdet.php?transac_id=' + tid);
   }

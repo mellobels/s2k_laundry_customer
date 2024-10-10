@@ -1,63 +1,15 @@
-.heading1 {
-  font-size: 16px;
-  color: #ffffff;
+.table-responsive {
+  overflow-x: auto;
 }
 
-.btn, .browse-button {
-  background-color: #5988e2;
-  color: #fff;
-  cursor: pointer;
-}
-
-.browse-button:hover {
-  background-color: #14305a;
+.table-scroll {
+  display: block;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .search-input {
-  border: none;
-  border-bottom: 1px solid #ccc;
-  background-color: transparent;
-  outline: none;
-  color: #6c757d; /* Text color to match muted text */
-  padding: 5px 10px;
-}
-
-.search-input::placeholder, .fa-search {
-  color: #6c757d; /* Icon and placeholder color */
-  cursor: pointer;
-}
-
-/* Table Styling */
-th {
-  font-size: 14px;
-  color: #323031;
-}
-
-tr {
-  font-size: 13px;
-}
-
-tbody tr:hover {
-  background-color: #fff6 !important;
-}
-
-td img {
-  width: 36px;
-  height: 36px;
-  margin-right: .5rem;
-  border-radius: 50%;
-  vertical-align: middle;
-}
-
-.status {
-  padding: 2px;
-  border-radius: 2rem;
-  text-align: center;
-}
-
-.status.received {
-  background-color: #86e49d;
-  color: #006b21;
+  width: 200px;
 }
 
 .status.pending {
@@ -65,86 +17,53 @@ td img {
   color: #986500;
 }
 
-/* Custom Button Styling */
-.custom-update-btn {
-  background-color: #007bff; /* Blue */
-  color: white;
+/* Base styling for all action buttons */
+.custom-action-btn {
+  width: 35px; /* Fixed width */
+  height: 35px; /* Fixed height */
   border: none;
-  padding: 5px 10px;
+  margin: 2px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 14px; /* Ensure the icons fit well */
   cursor: pointer;
-  margin-right: 5px;
+}
+
+/* Individual button color styling */
+.custom-update-btn {
+  background-color: #007bff; /* Primary color */
+  color: white;
 }
 
 .custom-update-btn:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
 }
 
 .custom-view-btn {
-  background-color: #17a2b8; /* Light blue */
+  background-color: #17a2b8; /* Info color */
   color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 .custom-view-btn:hover {
-  background-color: #117a8b; /* Darker light blue on hover */
+  background-color: #117a8b;
 }
 
-.form-check-label {
-  margin-left: 10px;
+.custom-cancel-btn {
+  background-color: #dc3545; /* Danger color */
+  color: white;
 }
 
-/* Responsive Design */
+.custom-cancel-btn:hover {
+  background-color: #c82333;
+}
+
 @media (max-width: 576px) {
-  .border-right {
-    border-right: 0; /* Remove right border on extra small screens */
-  }
   .col-md-8, .col-md-4 {
-    width: 100%; /* Make columns full width on small screens */
+    width: 100%;
   }
   .col-md-4 {
-    margin-top: 20px; /* Add spacing between rows */
+    margin-top: 20px;
   }
-}
-
-/* Typography */
-.solditems, .money {
-  font-size: 13px;
-  color: #9FA8DA;
-}
-
-.goal {
-  font-size: 17px;
-  color: #D50000;
-  font-weight: 400;
-}
-
-.revenue, .orders, .customer {
-  font-size: 14px;
-  color: #311B92;
-  font-weight: 500;
-}
-
-.balance {
-  font-size: 45px;
-  color: green;
-}
-
-.account {
-  margin-bottom: 36px !important;
-  font-size: 16px;
-  color: #1A237E;
-}
-
-.transaction {
-  font-size: 13px;
-}
-
-.progress {
-  height: 3px !important;
 }
