@@ -1,6 +1,5 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
-    <!-- Left Column for Transactions -->
     <div class="col-12 col-md-8 mb-3">
       <div class="card shadow">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -20,8 +19,9 @@
                   <th scope="col">Qty</th>
                   <th scope="col">Weight</th>
                   <th scope="col">Date</th>
-                  <th scope="col">Price</th>
                   <th scope="col">Status</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Service</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -34,15 +34,16 @@
                   <td>{{item.totalQty}}</td>
                   <td>{{item.totalWeight}}</td>
                   <td>{{item.Transac_date}}</td>
+                  <td><p  class="status pending">{{item.service}}</p></td>
                   <td>{{item.totalprice}}</td>
                   <td>
-                    <p class="status pending">pending</p>
+                    <p class="status pending">{{item.Transac_status}}</p>
                   </td>
                   <td>
-                    <button class="btn custom-action-btn custom-update-btn" (click)="updateItem()">
+                    <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.Tracking_number, item)">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
                     </button>
-                    <button class="btn custom-action-btn custom-view-btn" (click)="viewItem()" [routerLink]="['/main/cusmainhome/homemain/history']">
+                    <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
                       <i class="fa fa-eye" aria-hidden="true"></i>
                     </button>
                     <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
@@ -57,41 +58,64 @@
         </div>
       </div>
     </div>
-
-    <!-- Right Column for Category and Pricing -->
-    <div class="col-12 col-md-4">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
-            <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th scope="col">Category</th>
-                  <th scope="col" class="text-right">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (c of categ; track c.Categ_ID) {
-                <tr>
-                  <td>{{c.Category}}</td>
-                  <td class="text-right">
-                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
-                  </td>
-                </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
+</div> -->
+
+<div class="container-fuild">
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <!-- Add New Transaction Button -->
+    <button class="btn btn-primary" data-bs-toggle="modal"data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
+      <i class="fa fa-plus-circle"></i> Add New Transaction
+    </button>
+    <!-- Search Input -->
+    <input type="text" id="searchInput" class="form-control search-input" placeholder="Search" onkeyup="searchTable()">
+  </div>
+<div class="table-responsive">
+  <table class="table table-borderless table-hover table-striped">
+    <thead class="table-header">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Tracking #</th>
+        <th scope="col">Laundry Item</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+        <th scope="col">Price</th>
+        <th scope="col">Service</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody class="">
+      @for (item of trans; track item.Tracking_number) {
+      <tr>
+        <td></td>
+        <td>{{item.Tracking_number}}</td>
+        <td>{{item.Category}}</td>
+        <td>{{item.totalQty}}</td>
+        <td>{{item.totalWeight}}</td>
+        <td>{{item.Transac_date}}</td>
+        <td><p  class="badge status-pending">{{item.service}}</p></td>
+        <td>{{item.totalprice}}</td>
+        <td>
+          <p class="status pending">{{item.Transac_status}}</p>
+        </td>
+        <td>
+          <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.Tracking_number, item)">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </button>
+          <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </button>
+          <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </button>
+        </td>                  
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
 </div>
 
 <!-- The Modal -->
@@ -115,13 +139,16 @@
                   </div>
                 </div>
                 <div class="col-lg-6">
-                  <strong>Billing address</strong><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <address>
-                    <strong>John Doe</strong><br>
-                    1355 Market St, Suite 900<br>
-                    San Francisco, CA 94103<br>
-                    <abbr title="Phone">P:</abbr> (123) 456-7890
-                  </address>
+                  <div class="billing-address">
+                    <strong>Billing address</strong>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Address"></i>
+                    <address>
+                        <strong>John Doe</strong><br>
+                        1355 Market St, Suite 900<br>
+                        San Francisco, CA 94103<br>
+                        <abbr title="Phone">Phone:</abbr> (123) 456-7890
+                    </address>
+                </div>                
                 </div>
               </div>
               <hr>
@@ -145,7 +172,7 @@
                 </div>
                 <div class="col-12 col-md-4 d-flex align-items-end mb-3">
                   <div class="form-group w-100">
-                    <button class="btn btn-info btn-sm w-100" type="button" id="add_to_list" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
+                    <button class="btn btn-sm w-100" type="button" id="add_to_list" style="background-color: #5988e2;" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
                   </div>
                 </div>
               </div>
@@ -214,3 +241,95 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- UPDATED UPDATE MODAL -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #updateModal>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Transaction</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label>Tracking Number: {{ selectedTransaction?.Tracking_number }}</label>
+        </div>
+        <div class="mb-3">
+          <label for="services" class="control-label">Service Type: {{ selectedTransaction?.service }}</label><br>
+          <div class="d-flex">
+            <div class="form-check me-3" *ngFor="let service of availableServices">
+              <!-- <input class="form-check-input" type="radio" [value]="service" [(ngModel)]="selectedTransaction.Transac_status"> -->
+              <label class="form-check-label">{{ selectedTransaction.details.service }}</label>
+            </div>
+          </div>
+          <label>Selected Service: {{ selectedTransaction?.Transac_status }}</label>
+        </div>
+        <table>
+          <tbody>
+              <tr *ngFor="let detail of selectedTransaction?.details; let i = index">
+              
+                  <td>
+                      <select class="form-control" [(ngModel)]="detail.Categ_ID">
+                          <option value="" disabled>Select Category</option>
+                          <ng-container *ngFor="let category of categ">
+                              <option [value]="category.Categ_ID">{{ category.Category }}</option>
+                          </ng-container>
+                      </select>
+                  </td>
+                  <td>
+                      <input type="number" class="form-control" [(ngModel)]="detail.Qty" placeholder="Enter quantity" min="1">
+                  </td>
+                  <td>
+                      <button class="btn btn-danger" (click)="removeDetail(i)">Remove</button>
+                      <h1>{{detail.Category}}</h1>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+      <button class="btn btn-success" (click)="addDetail()">Add</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateTransaction()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+ <!-- Right Column for Category and Pricing -->
+    <!-- <div class="col-12 col-md-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+            <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col" class="text-right">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (c of categ; track c.Categ_ID) {
+                <tr>
+                  <td>{{c.Category}}</td>
+                  <td class="text-right">
+                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> -->

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row gutters">
         <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
@@ -6,11 +6,9 @@
                     <div class="account-settings">
                         <div class="user-profile">
                             <div class="user-avatar">
-                                <img src="assets/profie3.png" alt="Customer" class="img-fluid">
+                                <img [src]="imagePreview" alt="Customer" class="img-fluid" style="width: auto; height: 180px;">
+                                <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="Cust_image">
                             </div>
-                            @for(c of customerData; track c){
-                            <h5 class="user-name">{{c.cust_fname}} {{c.cust_lname}}</h5>
-                            }    
                         </div>
                     </div>
                 </div>
@@ -19,59 +17,162 @@
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
-                    <form>
-                        <input type="hidden" class="form-control" formControlName="cid">
+                    <form [formGroup]="profileform" (ngSubmit)="save()">
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <h6 class="mb-2 text-primary">Personal Details</h6>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="fullName">First Name</label>
-                                    <input type="text" class="form-control" id="fname" formControlName="fname">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" formControlName="Cust_fname" [value]="customerData?.Cust_fname">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="fullName">Middle Name</label>
-                                    <input type="text" class="form-control" id="fullName" placeholder="Enter full name" formControlName="mname">
+                                    <label for="mname">Middle Name</label>
+                                    <input type="text" class="form-control" id="mname" formControlName="Cust_mname" [value]="customerData?.Cust_mname">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label for="fullName">Last Name</label>
-                                    <input type="text" class="form-control" id="fullName" placeholder="Enter full name" formControlName="lname">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="eMail">Email</label>
-                                    <input type="email" class="form-control" id="eMail" placeholder="Enter email ID" formControlName="email">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" formControlName="Cust_lname" [value]="customerData?.Cust_lname">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="phone">Phone</label>
-                                    <input type="text" class="form-control" id="phone" placeholder="Enter phone number" formControlName="phonenum">
+                                    <input type="text" class="form-control" id="phone" formControlName="Cust_phoneno" [value]="customerData?.Cust_phoneno">
                                 </div>
                             </div>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mt-3 mb-2 text-primary">Address</h6>
-                                <input type="text" class="form-control" id="address" placeholder="Enter Address" formControlName="address">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" formControlName="Cust_email" [value]="customerData?.Cust_email">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Password</label>
+                                    <input type="email" class="form-control" id="email" formControlName="Cust_password" [value]="customerData?.Cust_password">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="email">Address</label>
+                                    <input type="email" class="form-control" id="email" formControlName="Cust_address" [value]="customerData?.Cust_address">
+                                </div>
                             </div>
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="text-right">
                                     <button type="button" id="cancel" name="cancel" class="btn btn-cancel">Cancel</button>
-                                    <button type="submit" id="submit" name="submit" class="btn btn-update">Update</button>
+                                    <button type="submit" id="submit" name="submit" class="btn btn-update text-success">Update</button>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form>                    
                 </div>
             </div>
         </div>
     </div>
+</div> -->
+
+<div class="container rounded bg-white mt-5">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <!-- Image Upload Input -->
+                <div class="d-flex flex-column align-items-center">
+                  <!-- Customer Image -->
+                  <img [src]="imagePreview" alt="Customer" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #ddd;">
+                  
+                  <!-- Hidden File Input -->
+                  <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" formControlName="Cust_image" style="display: none;">
+                  
+                  <!-- Clickable Icon to trigger the file input -->
+                  <label for="fileInput" class="cursor-pointer mt-2">
+                    <i class="fas fa-camera" style="color: #929292; font-size: 1.5rem;"></i> <!-- FontAwesome Camera Icon -->
+                  </label>
+                </div>
+                
+                <!-- Customer Info -->
+                <div class="mt-3">
+                  <span class="font-weight-bold">Name</span><br>
+                  <span class="text-black-50">emailexample.com</span><br>
+                  <span>Customer Address</span>
+                </div>
+              </div>
+              
+          </div>
+          
+        <div class="col-md-8">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                        <h6>Back to home</h6>
+                    </div>
+                    <h6 class="text-right">Edit Profile</h6>
+                </div>
+            <form [formGroup]="profileform" (ngSubmit)="save()">
+                <div class="row mt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lname">Last Name</label>
+                            <input type="text" class="form-control" id="lname" formControlName="Cust_lname" [value]="customerData?.Cust_lname">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="fname">First Name</label>
+                            <input type="text" class="form-control" id="fname" formControlName="Cust_fname" [value]="customerData?.Cust_fname">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="mname">Middle Name</label>
+                            <input type="text" class="form-control" id="mname" formControlName="Cust_mname" [value]="customerData?.Cust_mname">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" id="phone" formControlName="Cust_phoneno" [value]="customerData?.Cust_phoneno">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" formControlName="Cust_email" [value]="customerData?.Cust_email">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="email">Password</label>
+                        <input type="email" class="form-control" id="email" formControlName="Cust_password" [value]="customerData?.Cust_password">
+                    </div>
+                </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Address</label>
+                            <input type="email" class="form-control" id="email" formControlName="Cust_address" [value]="customerData?.Cust_address">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 text-right">
+                    <button type="submit" id="submit" name="submit" class="btn btn-primary profile-button">Update Profile</button>
+                  </div>                  
+            </form>
+            </div>
+        </div>
+    </div>
 </div>
-                            
+

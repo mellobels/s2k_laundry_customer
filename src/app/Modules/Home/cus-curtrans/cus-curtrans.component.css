@@ -1,5 +1,10 @@
+.search-input {
+  max-width: 200px;
+  margin: 0 1rem;
+}
 .table-responsive {
   overflow-x: auto;
+  max-height: 100%;
 }
 
 .table-scroll {
@@ -9,31 +14,32 @@
 }
 
 .search-input {
-  width: 200px;
+  width: 100%;
+  max-width: 200px;
 }
 
 .status.pending {
   background-color: #ebc474;
   color: #986500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
 }
 
-/* Base styling for all action buttons */
 .custom-action-btn {
-  width: 35px; /* Fixed width */
-  height: 35px; /* Fixed height */
-  border: none;
+  width: 30px;
+  height: 30px;
   margin: 2px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  font-size: 14px; /* Ensure the icons fit well */
+  font-size: 14px;
   cursor: pointer;
 }
 
-/* Individual button color styling */
 .custom-update-btn {
-  background-color: #007bff; /* Primary color */
+  background-color: #007bff;
   color: white;
 }
 
@@ -42,7 +48,7 @@
 }
 
 .custom-view-btn {
-  background-color: #17a2b8; /* Info color */
+  background-color: #17a2b8;
   color: white;
 }
 
@@ -51,7 +57,7 @@
 }
 
 .custom-cancel-btn {
-  background-color: #dc3545; /* Danger color */
+  background-color: #dc3545;
   color: white;
 }
 
@@ -59,11 +65,97 @@
   background-color: #c82333;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 992px) {
   .col-md-8, .col-md-4 {
     width: 100%;
   }
   .col-md-4 {
     margin-top: 20px;
+  }
+  .table-scroll {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .table-responsive {
+    font-size: 0.9rem;
+  }
+  .custom-action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .search-input {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table-header {
+  background-color: #f8f9fa;
+}
+
+.table th, .table td {
+  white-space: nowrap;
+}
+
+.badge.status-pending {
+  background-color: #ebc474;
+  color: #986500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.action-btn {
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+  border: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.update-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.update-btn:hover {
+  background-color: #0056b3;
+}
+
+.view-btn {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.view-btn:hover {
+  background-color: #117a8b;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 576px) {
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 }

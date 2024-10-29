@@ -1,22 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-history',
+  selector: 'app-cus-payment',
   standalone: true,
-  imports: [RouterLink,CommonModule,ReactiveFormsModule,RouterOutlet],
-  templateUrl: './history.component.html',
-  styleUrl: './history.component.css'
+  imports: [CommonModule, RouterOutlet,RouterLink],
+  templateUrl: './cus-payment.component.html',
+  styleUrl: './cus-payment.component.css'
 })
-export class HistoryComponent implements OnInit{
+export class CusPaymentComponent implements OnInit{
   selectedFile: any;
   imagePreview: any;
   cust_id = {id:localStorage.getItem('Cust_ID')};
   trackingNumber: {id: string | null} = {id:localStorage.getItem('Tracking_number')};
-
   constructor(private http: HttpClient){}
 
   onFileSelected(event: any) {

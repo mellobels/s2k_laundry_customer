@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,12 @@ export class MyServiceService {
     return this.http.post(this.Apiurl + 'login',data);
   }
 
+  logout(headers: any){
+    const token = localStorage.getItem('token');
+    // const headers = new HttpHeaders().set('Authorization',`Bearer $(token)`);
+    return this.http.post(this.Apiurl + 'logout', {}, {headers});
+  }
+
   displaycateg(){
     return this.http.get(this.url + 's2kdisplaycategory.php');
   }
@@ -63,15 +70,50 @@ export class MyServiceService {
     return this.http.get(this.url + 'showdet.php?transac_id=' + tid);
   }
 
-  getcustomerdata(data:any){
-    return this.http.get(this.url + 'getcustomer.php?id=' + data);
-  }
+  // getcustomerdata(data:any){
+  //   return this.http.get(this.url + 'getcustomer.php?id=' + data);
+  // }
 
   updateuser(udata:any){
-    return this.http.post(this.url + 'updateuser.php',JSON.stringify(udata));
+    return this.http.post(`${this.Apiurl}updateCus`,udata);
   }
 
   gentracknum(){
     return this.http.get(this.url + 'tracknum.php');
   }
+
+  insertNewDetails(newEntries: { Categ_ID: number, Qty: number, Tracking_number: string }[]): Observable<any> {
+    return this.http.post(`${this.Apiurl}insertDetails`,newEntries);
+  }
+
+  deleteDetails(deletedEntries: number[]): Observable<any> {
+    return this.http.delete(`${this.Apiurl}deleteDetails`,{
+      body: { deletedEntries } 
+    });
+  }
+
+  updateTransactionStatus(trackingNumber: string, transacStatus: string): Observable<any> {
+    return this.http.post(`${this.Apiurl}insertDetails`,{ Tracking_number: trackingNumber, Transac_status: transacStatus });
+  }
+
+  displayDet(data:any):Observable<any>{
+    return this.http.get(`${this.Apiurl}displayDet/${data}`);
+  }
+
+  updatetransac(data: any){
+    return this.http.post(`${this.Apiurl}updatetrans/`, data);
+  }
+
+  displayTransac(data:any):Observable<any>{
+    return this.http.get(`${this.Apiurl}doneTrans/${data}`);
+  }
+
+  addcustomer(data: any){
+    return this.http.post(this.Apiurl + 'addcustomer',data)
+  }
+
+  getcustomer(data:any){
+    return this.http.get(`${this.Apiurl}getcustomer/${data}`);
+  }
+ 
 }

@@ -18,13 +18,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>S2K-629850753431</td>
-          <td>2/3/2024</td>
-          <td>Received</td>
-          <td>Gcash</td>
-          <td>100</td>
-        </tr>
+        @for(t of history; track t.history){
+          <tr>
+            <td>{{t.Tracking_number}}</td>
+            <td>{{t.Transac_date}}</td>
+            <td>{{t.Transac_status}}</td>
+            <td class="text-right">{{t.totalprice}}</td>
+            <td class="text-right">{{t.Amount}}</td>
+          </tr>
+        }
         <!-- Additional rows can be added here -->
       </tbody>
     </table>

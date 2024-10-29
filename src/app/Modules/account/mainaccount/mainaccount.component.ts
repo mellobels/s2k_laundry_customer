@@ -1,61 +1,116 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { MyServiceService } from '../../../my-service.service';
+import Swal from 'sweetalert2';
 
-@Component({
-  selector: 'app-mainaccount',
-  standalone: true,
-  imports: [RouterModule,ReactiveFormsModule,CommonModule],
-  templateUrl: './mainaccount.component.html',
-  styleUrl: './mainaccount.component.css'
-})
-export class MainaccountComponent implements OnInit {
+  @Component({
+    selector: 'app-mainaccount',
+    standalone: true,
+    imports: [RouterModule,ReactiveFormsModule,CommonModule, FormsModule,RouterOutlet],
+    templateUrl: './mainaccount.component.html',
+    styleUrl: './mainaccount.component.css'
+  })
+  export class MainaccountComponent implements OnInit {
+    selectedFile: any;
+    imagePreview: any;
+    cusid: any;
 
-  constructor(private myserv:MyServiceService){}
+    constructor(private myserv:MyServiceService){}
 
-  custid = localStorage.getItem("cust_id");
-  customerData: any;
-  temp:any;
-  profileform = new FormGroup({
-    cid: new FormControl(null),
-    fname: new FormControl(null),
-    lname: new FormControl(null),
-    mname: new FormControl(null),
-    email: new FormControl(null),
-    phonenum: new FormControl(null),
-    address: new FormControl(null),
-})
 
-  ngOnInit(): void {
+    custid = {id: localStorage.getItem("Cust_ID")};
+    customerData: any;
+    temp:any;
+    profileform = new FormGroup({
+      Cust_ID: new FormControl(this.custid.id),
+      Cust_fname: new FormControl(null),
+      Cust_lname: new FormControl(null),
+      Cust_mname: new FormControl(null),
+      Cust_email: new FormControl(null),
+      Cust_phoneno: new FormControl(null),
+      Cust_address: new FormControl(null),
+      Cust_password: new FormControl(null),
+      Cust_image: new FormControl(null)
+  })
 
-    this.myserv.getcustomerdata(this.custid).subscribe((data:any)=>{
-      this.customerData = data;
-      if (data && data.length > 0) {
-        data.forEach((customer: any) => {
-          this.profileform.setValue({
-            cid: customer.cust_id,
-            fname: customer.cust_fname,
-            lname: customer.cust_lname,
-            mname: customer.cust_mname,
-            phonenum: customer.cust_phoneno,
-            address: customer.cust_address,
-            email: customer.cust_email,
-            })
-        });}
-      });  
+    ngOnInit(): void {
+      console.log(this.custid.id)
+      this.cusid = {id: localStorage.getItem("Cust_ID")};
+      this.myserv.getcustomer(this.cusid.id).subscribe((data:any)=>{
+        console.log(data);
+        this.customerData = data;
+        console.log(this.customerData)
+      })
+    }
+
     
+
+    save() {
+      console.log(this.profileform.value)
+      this.myserv.updateuser(this.profileform.value).subscribe(
+        (result: any) => {
+          this.temp = result;
+    
+          // SweetAlert for success notification
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Your profile has been updated successfully.',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+          }).then(() => {
+            // Reload or navigate after the SweetAlert success closes
+            // location.reload();
+          });
+    
+        },
+        (error: any) => {
+          // SweetAlert for error notification
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'There was an issue updating your profile. Please try again.',
+            confirmButtonText: 'OK'
+          });
+          console.error("Error updating profile:", error);
+        }
+      );
+    }
+    
+
+    onFileSelected(event: any){
+      const file = (event.target as HTMLInputElement).files![0];
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = () =>{
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+
+
+      // this.selectedFile = event.target.files[0] as File;
+      // this.previewimage();
+    }
+
+    previewimage(){
+      if (this.selectedFile){
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview = reader.result;
+        };
+        reader.readAsDataURL(this.selectedFile);
+      }
+    }
+
   }
 
-  
 
-  // update(){
-  //   this.post.updateuser(this.profileform.value).subscribe((result:any)=>{
-  //     this.temp = result;
-  //     location.reload()
-  //     console.log(this.temp);
-  //   })
-  // }
 
-}
+
+
+
