@@ -23,7 +23,7 @@ export class CusCurtransComponent implements OnInit{
 
   selectedTransaction: any = {}; // This will hold the selected transaction details
   deletedDetails: number[] = [];  // Array to track deleted transaction details
-availableServices: any;
+  availableServices: any;
   
   constructor(
     private route: Router,

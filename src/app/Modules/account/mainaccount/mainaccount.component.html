@@ -79,100 +79,87 @@
         </div>
     </div>
 </div> -->
-
-<div class="container rounded bg-white mt-5">
+<div class="container rounded bg-white my-4">
     <div class="row">
-        <div class="col-md-4 border-right">
+        <!-- Profile Picture Section -->
+        <div class="col-lg-4 col-md-5 col-sm-12 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <!-- Image Upload Input -->
                 <div class="d-flex flex-column align-items-center">
-                  <!-- Customer Image -->
-                  <img [src]="imagePreview" alt="Customer" class="rounded-circle mb-2" style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #ddd;">
-                  
-                  <!-- Hidden File Input -->
-                  <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" formControlName="Cust_image" style="display: none;">
-                  
-                  <!-- Clickable Icon to trigger the file input -->
-                  <label for="fileInput" class="cursor-pointer mt-2">
-                    <i class="fas fa-camera" style="color: #929292; font-size: 1.5rem;"></i> <!-- FontAwesome Camera Icon -->
-                  </label>
+                    <img [src]="imagePreview" alt="Customer" class="rounded-circle mb-2 img-fluid" 
+                         style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #ddd;">
+                    <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" 
+                           formControlName="Cust_image" style="display: none;">
+                    <label for="fileInput" class="cursor-pointer mt-2">
+                        <i class="fas fa-camera" style="color: #929292; font-size: 1.5rem;"></i>
+                    </label>
                 </div>
-                
-                <!-- Customer Info -->
                 <div class="mt-3">
-                  <span class="font-weight-bold">Name</span><br>
-                  <span class="text-black-50">emailexample.com</span><br>
-                  <span>Customer Address</span>
+                    <span class="font-weight-bold">Name</span><br>
+                    <span class="text-black-50">emailexample.com</span><br>
+                    <span>Customer Address</span>
                 </div>
-              </div>
-              
-          </div>
-          
-        <div class="col-md-8">
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="col-lg-8 col-md-7 col-sm-12">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="d-flex flex-row align-items-center back"><i class="fa fa-long-arrow-left mr-1 mb-1"></i>
+                    <div class="d-flex flex-row align-items-center">
+                        <i class="fa fa-long-arrow-left mr-1 mb-1"></i>
                         <h6>Back to home</h6>
                     </div>
                     <h6 class="text-right">Edit Profile</h6>
                 </div>
-            <form [formGroup]="profileform" (ngSubmit)="save()">
-                <div class="row mt-2">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                <form [formGroup]="profileform" (ngSubmit)="save()">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="lname">Last Name</label>
-                            <input type="text" class="form-control" id="lname" formControlName="Cust_lname" [value]="customerData?.Cust_lname">
+                            <input type="text" class="form-control" id="lname" formControlName="Cust_lname" 
+                                   [value]="customerData?.Cust_lname">
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="col-md-6 mb-3">
                             <label for="fname">First Name</label>
-                            <input type="text" class="form-control" id="fname" formControlName="Cust_fname" [value]="customerData?.Cust_fname">
+                            <input type="text" class="form-control" id="fname" formControlName="Cust_fname" 
+                                   [value]="customerData?.Cust_fname">
                         </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
                             <label for="mname">Middle Name</label>
-                            <input type="text" class="form-control" id="mname" formControlName="Cust_mname" [value]="customerData?.Cust_mname">
+                            <input type="text" class="form-control" id="mname" formControlName="Cust_mname" 
+                                   [value]="customerData?.Cust_mname">
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
+                        <div class="col-md-6 mb-3">
                             <label for="phone">Phone</label>
-                            <input type="text" class="form-control" id="phone" formControlName="Cust_phoneno" [value]="customerData?.Cust_phoneno">
+                            <input type="text" class="form-control" id="phone" formControlName="Cust_phoneno" 
+                                   [value]="customerData?.Cust_phoneno">
                         </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" formControlName="Cust_email" [value]="customerData?.Cust_email">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="email">Password</label>
-                        <input type="email" class="form-control" id="email" formControlName="Cust_password" [value]="customerData?.Cust_password">
-                    </div>
-                </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="email">Address</label>
-                            <input type="email" class="form-control" id="email" formControlName="Cust_address" [value]="customerData?.Cust_address">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="Cust_email" 
+                                   [value]="customerData?.Cust_email">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" formControlName="Cust_password" 
+                                   [value]="customerData?.Cust_password">
                         </div>
                     </div>
-                </div>
-                <div class="mt-5 text-right">
-                    <button type="submit" id="submit" name="submit" class="btn btn-primary profile-button">Update Profile</button>
-                  </div>                  
-            </form>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" formControlName="Cust_address" 
+                                   [value]="customerData?.Cust_address">
+                        </div>
+                    </div>
+                    <div class="text-right mt-4">
+                        <button type="submit" class="btn btn-primary profile-button">Update Profile</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-

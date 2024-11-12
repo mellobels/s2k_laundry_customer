@@ -1,0 +1,33 @@
+ <!-- Right Column for Category and Pricing -->
+    <div class="col-12 col-md-4">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+          <div class="d-flex align-items-center">
+            <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+            <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Category</th>
+                  <th scope="col" class="text-right">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (c of categ; track c.Categ_ID) {
+                <tr>
+                  <td>{{c.Category}}</td>
+                  <td class="text-right">
+                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>

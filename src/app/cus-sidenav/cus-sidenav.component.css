@@ -61,3 +61,11 @@
 .navbar-nav .nav-link:hover::after {
   width: 100%; /* Full width on hover */
 }
+.collapse {
+  transition: max-height 0.3s ease-in-out;
+}
+
+.collapse.show {
+  /* display: block !important; */
+  max-height: 500px; /* Adjust as needed */
+}

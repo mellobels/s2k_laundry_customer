@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
@@ -68,10 +68,9 @@
               </div>
   
               <div class="mt-4 pt-2 text-center">
-                <!-- Submit Button -->
+
                 <input data-mdb-ripple-init class="btn btn-primary btn-sm mx-2" type="submit" value="Submit" />
               
-                <!-- "Go Back to Login" Button -->
                 <a [routerLink]="['/login']" class="btn btn-secondary btn-sm mx-2">Go Back to Login</a>
               </div>
               
@@ -82,4 +81,53 @@
       </div>
     </div>
   </div>
+</section> -->
+
+<section>
+<div class="container">
+  <div class="title">Signup</div>
+  <div class="content">
+    <!-- Registration form -->
+    <form [formGroup]="signup" (submit)="save()">
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">Firstname</span>
+          <input type="text" id="firstName" placeholder="firstname" class="form-control form-control-lg" formControlName="Cust_fname" >
+        </div>
+        <div class="input-box">
+          <span class="details">Lastname</span>
+          <input type="text" id="lastName" placeholder="lastname" class="form-control form-control-lg" formControlName="Cust_lname">
+        </div>
+        <div class="input-box">
+          <span class="details">Middlename</span>
+          <input type="text" id="middleName" placeholder="middleName" class="form-control form-control-lg" formControlName="Cust_mname"/>
+        </div>
+        <div class="input-box">
+          <span class="details">Phone Number</span>
+          <input type="tel" id="phoneNumber" placeholder="phone number" class="form-control form-control-lg" formControlName="Cust_phoneno"/>
+        </div>
+        <div class="input-box">
+          <span class="details">Address</span>
+          <input type="text" id="address" placeholder="address" class="form-control form-control-lg" formControlName="Cust_address"/>
+        </div>
+        <div class="input-box">
+          <span class="details">Email</span>
+          <input type="email" id="emailAddress" placeholder="email" class="form-control form-control-lg" formControlName="Cust_email"/>
+        </div>
+        <div class="input-box">
+          <span class="details">Password</span>
+          <input type="password" id="password" placeholder="password" class="form-control form-control-lg" formControlName="Cust_password"/>
+        </div>
+        <div class="input-box">
+          <span class="details">Confirm password</span>
+          <input type="password" id="passwordConfirm" placeholder="retype password" class="form-control form-control-lg" formControlName="Cust_password_confirmation"/>
+        </div>
+      </div>
+      
+      <div class="button">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+  </div>
+</div>
 </section>

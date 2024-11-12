@@ -1,71 +1,8 @@
-<!-- <div class="container-fluid">
-  <div class="row">
-    <div class="col-12 col-md-8 mb-3">
-      <div class="card shadow">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-          <h6 class="m-0">New Transaction
-            <i class="fa fa-plus-circle mx-1" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer;"></i>
-          </h6>
-          <input type="text" id="searchInput" class="form-control search-input" onkeyup="searchTable()" placeholder="Search">
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-borderless table-scroll" id="trackingTable">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Tracking #</th>
-                  <th scope="col">Laundry Item</th>
-                  <th scope="col">Qty</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Service</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody class="">
-                @for (item of trans; track item.Tracking_number) {
-                <tr>
-                  <td></td>
-                  <td>{{item.Tracking_number}}</td>
-                  <td>{{item.Category}}</td>
-                  <td>{{item.totalQty}}</td>
-                  <td>{{item.totalWeight}}</td>
-                  <td>{{item.Transac_date}}</td>
-                  <td><p  class="status pending">{{item.service}}</p></td>
-                  <td>{{item.totalprice}}</td>
-                  <td>
-                    <p class="status pending">{{item.Transac_status}}</p>
-                  </td>
-                  <td>
-                    <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.Tracking_number, item)">
-                      <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
-                      <i class="fa fa-eye" aria-hidden="true"></i>
-                    </button>
-                    <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
-                      <i class="fa fa-trash-o" aria-hidden="true"></i>
-                    </button>
-                  </td>                  
-                </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="container-fuild">
   <div class="d-flex justify-content-between align-items-center my-3">
     <!-- Add New Transaction Button -->
     <button class="btn btn-primary" data-bs-toggle="modal"data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
-      <i class="fa fa-plus-circle"></i> Add New Transaction
+      New Transaction <i class="fa fa-plus-circle"></i>
     </button>
     <!-- Search Input -->
     <input type="text" id="searchInput" class="form-control search-input" placeholder="Search" onkeyup="searchTable()">
@@ -88,7 +25,7 @@
     </thead>
     <tbody class="">
       @for (item of trans; track item.Tracking_number) {
-      <tr>
+      <tr (click)="viewItem(item.Tracking_number)">
         <td></td>
         <td>{{item.Tracking_number}}</td>
         <td>{{item.Category}}</td>
@@ -104,9 +41,9 @@
           <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.Tracking_number, item)">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </button>
-          <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
+          <!-- <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
             <i class="fa fa-eye" aria-hidden="true"></i>
-          </button>
+          </button> -->
           <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
             <i class="fa fa-trash-o" aria-hidden="true"></i>
           </button>
@@ -133,22 +70,10 @@
               <div class="row">
                 <div class="col-12 col-md-6 mb-3">
                   <div class="form-group">
-                    <label for="trackingNumber" class="control-label"><strong>Tracking Number</strong></label>
+                    <label for="trackingNumber" class="control-label">Tracking Number</label>
                     <input type="hidden" [value]="trackingNumber" formControlName="Tracking_number">
                     <h4 class="modal-title"><strong>{{ trackingNumber }}</strong></h4>
                   </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="billing-address">
-                    <strong>Billing address</strong>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true" title="Edit Address"></i>
-                    <address>
-                        <strong>John Doe</strong><br>
-                        1355 Market St, Suite 900<br>
-                        San Francisco, CA 94103<br>
-                        <abbr title="Phone">Phone:</abbr> (123) 456-7890
-                    </address>
-                </div>                
                 </div>
               </div>
               <hr>
@@ -182,14 +107,6 @@
                   <div class="form-group">
                     <label for="services" class="control-label">Services</label><br>
                     <div class="d-flex">
-                      <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="Transac_status"  id="handWash" value="handWash">
-                        <label class="form-check-label" for="handWash">Hand Wash</label>
-                      </div>
-                      <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="press" value="press">
-                        <label class="form-check-label" for="press">Press</label>
-                      </div>
                       <div class="form-check me-3">
                         <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="rush">
                         <label class="form-check-label" for="rush">Rush Jobs</label>
@@ -300,36 +217,3 @@
 
 
 
- <!-- Right Column for Category and Pricing -->
-    <!-- <div class="col-12 col-md-4">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <img src="assets/logo.png" alt="Logo" style="height: 30px; margin-right: 10px;">
-            <h6 style="text-transform: uppercase;">S2K wash-dry-fold</h6>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table mb-0">
-              <thead>
-                <tr>
-                  <th scope="col">Category</th>
-                  <th scope="col" class="text-right">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (c of categ; track c.Categ_ID) {
-                <tr>
-                  <td>{{c.Category}}</td>
-                  <td class="text-right">
-                    <span class="badge rounded-pill" style="background-color: #5988E2;">{{c.Per_kilograms}}/kg</span>
-                  </td>
-                </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div> -->
