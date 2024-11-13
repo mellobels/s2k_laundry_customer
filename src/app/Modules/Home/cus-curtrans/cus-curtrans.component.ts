@@ -34,7 +34,7 @@ export class CusCurtransComponent implements OnInit{
   list: any;
   trackingNumber:any;
   customerdata:any
-  id = localStorage.getItem('Cust_ID');
+  id = {cuid: localStorage.getItem('Cust_ID')};
   trans_id: {id: string | null} = {id: localStorage.getItem('Tracking_Number')};
 
   
@@ -102,10 +102,10 @@ export class CusCurtransComponent implements OnInit{
     }
   }
   fetchtransactions(){
-    this.post.display().subscribe((data:any)=>{
+    this.post.display(this.id.cuid).subscribe((data:any)=>{
       this.trans = data.transaction;
       if(this.trans && this.trans.length > 0){
-        const pendingTransactions = this.trans.filter((transs: any) => transs.Transac_status === 'handWash' || transs.Transac_status === 'press' || transs.Transac_status === 'rush' || transs.Transac_status === 'pick' || transs.Transac_status === 'deliver');
+        const pendingTransactions = this.trans.filter((transs: any) => transs.trans_stat === 'handWash' || transs.trans_stat === 'press' || transs.trans_stat === 'rush' || transs.trans_stat === 'pick' || transs.trans_stat === 'deliver' || transs.trans_stat === 'paid');
 
         if(pendingTransactions.length > 0){
           console.log('Pending Trans', pendingTransactions);
@@ -131,7 +131,7 @@ export class CusCurtransComponent implements OnInit{
       this.categ = data;
       console.log(this.categ);
     })
-    this.post.display().subscribe((data:any)=>{
+    this.post.display(this.id.cuid).subscribe((data:any)=>{
       this.trans = data.transaction;
       this.fetchtransactions();
       console.log(this.trans);
@@ -143,7 +143,7 @@ export class CusCurtransComponent implements OnInit{
    this.trackingNumber = `S2K-${randomNumber}`;
 
    this.newtransac.controls['Tracking_number'].setValue(this.trackingNumber);
-   
+   this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
   }
   updateTransaction() {
     if (this.selectedTransaction && this.selectedTransaction.details) {
@@ -210,27 +210,27 @@ export class CusCurtransComponent implements OnInit{
     }
   }
 
-showDetails(Tracking_number: any, transaction: any) {
-  // First, set selectedTransaction based on the passed transaction
-  this.selectedTransaction = { ...transaction }; // Create a copy of the transaction
-  console.log('Selected transaction:', this.selectedTransaction);
+  showDetails(Tracking_number: any, transaction: any) {
+    // First, set selectedTransaction based on the passed transaction
+    this.selectedTransaction = { ...transaction }; // Create a copy of the transaction
+    console.log('Selected transaction:', this.selectedTransaction);
 
-  // Then, fetch the details and add them to the selected transaction
-  this.post.displayDet(Tracking_number).subscribe((res: any) => {
-    this.selectedTransaction.details = res; // Assign details separately
-    console.log('Transaction details:', this.selectedTransaction.details);
+    // Then, fetch the details and add them to the selected transaction
+    this.post.displayDet(Tracking_number).subscribe((res: any) => {
+      this.selectedTransaction.details = res; // Assign details separately
+      console.log('Transaction details:', this.selectedTransaction.details);
 
-    // Now open the modal
-    const modalElement = document.getElementById('updateModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);
-      modal.show();
-    }
-  });
-}
+      // Now open the modal
+      const modalElement = document.getElementById('updateModal');
+      if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement);
+        modal.show();
+      }
+    });
+  }
 
-// Method to remove a detail
-removeDetail(index: number) {
+  // Method to remove a detail
+  removeDetail(index: number) {
     const detail = this.selectedTransaction.details[index];
     if (detail.TransacDet_ID) {
       // Track the detail for deletion if it exists in the database
@@ -256,21 +256,21 @@ removeDetail(index: number) {
     }
   }
 
-// Method to add a new detail row
-addDetail() {
-  if (!this.selectedTransaction.details) {
-    this.selectedTransaction.details = [];
+  // Method to add a new detail row
+  addDetail() {
+    if (!this.selectedTransaction.details) {
+      this.selectedTransaction.details = [];
+    }
+    this.selectedTransaction.details.push({
+      Categ_ID: null, // Default or null category
+      Qty: 1, // Default quantity
+    });
   }
-  this.selectedTransaction.details.push({
-    Categ_ID: null, // Default or null category
-    Qty: 1, // Default quantity
-  });
-}
 
-// Optionally, add method to clear deletedDetails after saving
-resetDeletedDetails() {
-  this.deletedDetails = [];
-}
+  // Optionally, add method to clear deletedDetails after saving
+  resetDeletedDetails() {
+    this.deletedDetails = [];
+  }
 
 
   removeFromList(item: any) {

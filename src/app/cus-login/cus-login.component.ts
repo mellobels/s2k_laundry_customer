@@ -16,8 +16,8 @@ export class CusLoginComponent implements OnInit{
   constructor(private myserv: MyServiceService, private route: Router){}
   
   loginForm =new FormGroup({
-    Cust_email: new FormControl(null),
-    Cust_password: new FormControl(null),
+    email: new FormControl(null),
+    password: new FormControl(null),
   })
   logdata: any;
   ngOnInit(): void {  

@@ -16,11 +16,12 @@ export class MyServiceService {
   ) { }
 
   displaycategory(){
-    return this.http.get(this.Apiurl + 'laundycateg');
+    return this.http.get(this.Apiurl + 'getlist');
   }
 
-  display(){
-    return this.http.get(this.Apiurl + 'display');
+  display(id: any){
+    // return this.http.get(this.Apiurl + 'display', id);
+    return this.http.get(`${this.Apiurl}display/${id}`)
   }
 
   addtrans(data: any){
@@ -45,7 +46,7 @@ export class MyServiceService {
   //   return this.http.post(this.url + 's2klogin.php',JSON.stringify(log));
   // }
   login(data: any){
-    return this.http.post(this.Apiurl + 'login',data);
+    return this.http.post(this.Apiurl + 'logins',data);
   }
 
   logout(headers: any){

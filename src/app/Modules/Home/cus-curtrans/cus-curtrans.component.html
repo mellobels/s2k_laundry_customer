@@ -1,7 +1,7 @@
 <div class="container-fuild">
   <div class="d-flex justify-content-between align-items-center my-3">
     <!-- Add New Transaction Button -->
-    <button class="btn btn-primary" data-bs-toggle="modal"data-bs-toggle="modal" data-bs-target="#myModal" (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
+    <button class="btn btn-primary"  (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
       New Transaction <i class="fa fa-plus-circle"></i>
     </button>
     <!-- Search Input -->
@@ -95,6 +95,17 @@
                     <input type="number" step="any" min="1" class="form-control text-right" id="weight" formControlName="Qty">
                   </div>
                 </div>
+
+                <!-- Count -->
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="weight" class="control-label">Count</label>
+                    <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
+                  </div>
+                </div>
+
+                
+
                 <div class="col-12 col-md-4 d-flex align-items-end mb-3">
                   <div class="form-group w-100">
                     <button class="btn btn-sm w-100" type="button" id="add_to_list" style="background-color: #5988e2;" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
