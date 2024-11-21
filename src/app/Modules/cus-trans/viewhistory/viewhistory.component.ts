@@ -1,34 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Route, Router, RouterLink } from '@angular/router';
 import { MyServiceService } from '../../../my-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-viewhistory',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,CommonModule],
   templateUrl: './viewhistory.component.html',
   styleUrl: './viewhistory.component.css'
 })
 export class ViewhistoryComponent implements OnInit{
 
+  constructor(private post: MyServiceService,private router:Router){}
+
+  id = localStorage.getItem("Cust_ID");
+  hist:any;
   transDet_ID:any;
   temp:any;
 
   histf: any[] = []; // Original data source
-  filteredHist: any[] = [];
-  router: any;
+  filteredHist: any[] = []; // Filtered data for display
 
-  constructor(private post: MyServiceService){}
 
-  id = localStorage.getItem("Cust_ID");
-  history:any;
   ngOnInit(): void {
-    console.log(this.id)
-    this.post.displayTransac(1).subscribe((data:any)=>{
-      this.history = data;
-      console.log(this.history);
-    })
-   
+    console.log(this.id);
+  
+    // Fetch data from the API
+    this.post.gethis(this.id).subscribe((data: any) => {
+      this.hist = data;
+      this.histf = data; // Populate the original data source
+  
+      // Initially display all entries after data is loaded
+      this.filteredHist = this.histf;
+  
+      // Debugging: Ensure data is correctly retrieved
+      console.log(this.hist);
+      console.log(data);
+      console.log(this.id);
+    });
   }
 
   filterStatus(status: string): void {
@@ -59,5 +69,6 @@ export class ViewhistoryComponent implements OnInit{
     
   }
 
-}
+  
 
+}

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   @Component({
     selector: 'app-mainaccount',
     standalone: true,
-    imports: [RouterModule,ReactiveFormsModule,CommonModule, FormsModule,RouterOutlet],
+    imports: [RouterModule,ReactiveFormsModule,CommonModule, FormsModule],
     templateUrl: './mainaccount.component.html',
     styleUrl: './mainaccount.component.css'
   })

@@ -11,7 +11,7 @@ describe('ViewhistoryComponent', () => {
       imports: [ViewhistoryComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ViewhistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

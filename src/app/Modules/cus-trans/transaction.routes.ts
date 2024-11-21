@@ -2,21 +2,26 @@ import { Routes } from "@angular/router";
 import { Component } from '@angular/core';
 import { MaintransComponent } from "./maintrans/maintrans.component";
 import { ViewhistoryComponent } from "./viewhistory/viewhistory.component";
-import { CusPaymentComponent } from "./cus-payment/cus-payment.component";
+import { PanelComponent } from "./panel/panel.component";
 import { HistoryComponent } from "./history/history.component";
+import { HistorydetailsComponent } from "./historydetails/historydetails.component";
 export const Transroute: Routes = [
     {path: 'maintrans',component: MaintransComponent,
-        children: [
-            {path:"viewhistory",component:ViewhistoryComponent},
-            {path:"history",component:HistoryComponent,
-                children: [ 
-                    {path:"payment", component:CusPaymentComponent},
-                    {path:"",redirectTo:"payment",pathMatch:"full"}
+        children: [ 
+            {path:"panel",component:PanelComponent,
+                children:[
+                    {path:"history",component:HistoryComponent},
+                    {path:"",redirectTo:"history",pathMatch:"full"},
+                    {path:"historydetails",component:HistorydetailsComponent},
+                    // {path:"",redirectTo:"historydetails",pathMatch:"full"},
                 ]
             },
+            
+            {path:"viewhistory",component:ViewhistoryComponent},
             {path:"",redirectTo:"viewhistory",pathMatch:"full"},
-            { path:'maintrans',component:MaintransComponent},
+            {path:'maintrans',component:MaintransComponent},
             {path:"",redirectTo:"maintrans",pathMatch:"full"}
+
     ]
 
     },

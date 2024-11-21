@@ -284,7 +284,7 @@ export class CusCurtransComponent implements OnInit{
   viewItem(data: any) {
     // Implement logic to view details of the item based on tracking number
     console.log(data);
-    localStorage.setItem('Tracking_number', data)
+    localStorage.setItem('trans_ID', data)
     this.route.navigate(['/main/cusmainhome/homemain/history/payment']);
   }
   cancelItem(id: any){

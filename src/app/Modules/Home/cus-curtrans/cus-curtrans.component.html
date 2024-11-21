@@ -24,17 +24,17 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of trans; track item.track_num) {
+        @for (item of trans; track item.trans_ID) {
         <tr>
           <td></td>
-          <td (click)="viewItem(item.track_num)">{{item.track_num}}</td>
-          <td (click)="viewItem(item.track_num)">{{item.Category}}</td>
-          <td (click)="viewItem(item.track_num)">{{item.totalQty}}</td>
-          <td (click)="viewItem(item.track_num)">{{item.totalWeight}}</td>
-          <td (click)="viewItem(item.track_num)">{{item.Transac_date}}</td>
+          <td (click)="viewItem(item.trans_ID)">{{item.track_num}}</td>
+          <td (click)="viewItem(item.trans_ID)">{{item.Category}}</td>
+          <td (click)="viewItem(item.trans_ID)">{{item.totalQty}}</td>
+          <td (click)="viewItem(item.trans_ID)">{{item.totalWeight}}</td>
+          <td (click)="viewItem(item.trans_ID)">{{item.trans_date}}</td>
           <td><span class="status pending">{{item.service}}</span></td>
           <td>{{item.totalprice}}</td>
-          <td>{{item.Transac_status}}</td>
+          <td>{{item.trans_stat}}</td>
           <td>
             <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.track_num, item)">
               <i class="fa fa-pencil" aria-hidden="true"></i>

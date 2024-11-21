@@ -121,5 +121,19 @@ export class MyServiceService {
   getTransId(id:any):Observable<any>{
     return this.http.get(`${this.Apiurl}getTransId/${id}`);
   }
+
+  uploadPayment(data: any, trackingNumber: string) {
+    return this.http.post(`http://localhost:8000/api/upload/${trackingNumber}`, data);
+  }
+
+  getDetails(id:any){
+    return this.http.get(`${this.Apiurl}getDetails/${id}`);
+  }
+  gethis(id:any):Observable<any>{
+    return this.http.get(`${this.Apiurl}gethis/${id}`)
+  }
+
+
+  
  
 }
