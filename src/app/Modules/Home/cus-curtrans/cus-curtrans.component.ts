@@ -10,7 +10,7 @@ import * as bootstrap from 'bootstrap';
 @Component({
   selector: 'app-cus-curtrans',
   standalone: true,
-  imports: [CommonModule,RouterLink,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './cus-curtrans.component.html',
   styleUrl: './cus-curtrans.component.css'
 })
@@ -32,7 +32,7 @@ export class CusCurtransComponent implements OnInit{
   ){}
 
   list: any;
-  trackingNumber:any;
+  Tracking_Number:any;
   customerdata:any
   id = {cuid: localStorage.getItem('Cust_ID')};
   trans_id: {id: string | null} = {id: localStorage.getItem('Tracking_Number')};
@@ -140,9 +140,9 @@ export class CusCurtransComponent implements OnInit{
 
   gentrack(){
    const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
-   this.trackingNumber = `S2K-${randomNumber}`;
+   this.Tracking_Number = `S2K-${randomNumber}`;
 
-   this.newtransac.controls['Tracking_number'].setValue(this.trackingNumber);
+   this.newtransac.controls['Tracking_number'].setValue(this.Tracking_Number);
    this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
   }
   updateTransaction() {
@@ -165,7 +165,7 @@ export class CusCurtransComponent implements OnInit{
           newEntries.push({
             Categ_ID: detail.Categ_ID,
             Qty: detail.Qty,
-            Tracking_number: this.selectedTransaction.Tracking_number
+            Tracking_Number: this.selectedTransaction.track_num
           });
         }
       });
@@ -295,8 +295,9 @@ export class CusCurtransComponent implements OnInit{
         (response: any) => {
           // location.reload();
           console.log('Update successful', response);
-          Swal.fire('Success!', 'Laundry Category Price details updated successfully.', 'success').then(() => {
-            location.reload(); // Reload the page after the alert is closed
+          Swal.fire('Success!', 'Laundry Category Price details dalete successfully.', 'success').then(() => {
+            // location.reload(); 
+            this.fetchtransactions();
           });
           this.route.navigate(['/main/cusmainhome/homemain/cuscurtrans']);
         },

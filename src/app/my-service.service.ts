@@ -10,6 +10,7 @@ export class MyServiceService {
   Apiurl="http://localhost:8000/api/";
 
   public post: any[] = [];
+  trans: any;
 
   constructor(
     private http: HttpClient
@@ -61,9 +62,9 @@ export class MyServiceService {
   getTrackingNumber() {
     return this.http.get(this.url + 'generate_tracking.php');
   }
-  showhis(gdata:any){
-    return this.http.get(this.url + 'get_history.php?cust_id='+ gdata);
-  }
+  // showhis(gdata:any){
+  //   return this.http.get(this.url + 'get_history.php?cust_id='+ gdata);
+  // }
   // displaytransaction() {
   //   return this.http.get(this.Apiurl + 'display');
   // }
@@ -84,8 +85,9 @@ export class MyServiceService {
   }
 
   insertNewDetails(newEntries: { Categ_ID: number, Qty: number, Tracking_number: string }[]): Observable<any> {
-    return this.http.post(`${this.Apiurl}insertDetails`,newEntries);
+    return this.http.post(`${this.Apiurl}insertDetails`, newEntries);
   }
+  
 
   deleteDetails(deletedEntries: number[]): Observable<any> {
     return this.http.delete(`${this.Apiurl}deleteDetails`,{
@@ -106,7 +108,7 @@ export class MyServiceService {
   }
 
   displayTransac(data:any):Observable<any>{
-    return this.http.get(`${this.Apiurl}doneTrans/${data}`);
+    return this.http.get(`${this.Apiurl}getDetails/${data}`);
   }
 
   addcustomer(data: any){
@@ -115,6 +117,9 @@ export class MyServiceService {
 
   getcustomer(data:any){
     return this.http.get(`${this.Apiurl}getcustomer/${data}`);
+  }
+  getTransId(id:any):Observable<any>{
+    return this.http.get(`${this.Apiurl}getTransId/${id}`);
   }
  
 }

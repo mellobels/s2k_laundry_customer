@@ -18,7 +18,7 @@ export class MaintransComponent implements OnInit{
   id = localStorage.getItem("cust_id");
   history:any;
   ngOnInit(): void {
-    this.post.showhis(this.id).subscribe((data:any)=>{
+    this.post.displayTransac(this.id).subscribe((data:any)=>{
       this.history = data;
       console.log(this.history);
     })

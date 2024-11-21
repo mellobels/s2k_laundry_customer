@@ -9,7 +9,7 @@
               <div class="accordion-body">
                 <div class="container mt-4">
                   <ul id="progressbar" class="progress-bar-container">
-                    <li class="step0 active fs-6" id="step1">
+                    <!-- <li class="step0 active fs-6" id="step1">
                       Ordered
                       <br>
                       <span class="date">2024-10-25</span>
@@ -28,7 +28,15 @@
                       Delivered
                       <br>
                       <span class="date">2024-10-29</span>
-                    </li>
+                    </li> -->
+                    <li
+                        *ngFor="let step of steps; let i = index"
+                        [ngClass]="{ 'active': i <= currentStep }"
+                        class="step0 fs-6"
+                        (click)="tracking(i)"
+                      >
+                        {{ step }}
+                      </li>
                   </ul>
                 </div>                
                   <div class="info">

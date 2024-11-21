@@ -1,223 +1,114 @@
-<div class="container-fuild">
-  <div class="d-flex justify-content-between align-items-center my-3">
-    <!-- Add New Transaction Button -->
-    <button class="btn btn-primary"  (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
+<div class="container-fluid">
+  <div class="d-flex flex-wrap justify-content-between align-items-center my-3">
+    <button class="btn btn-primary mb-2" (click)="gentrack()" style="cursor: pointer; background-color: #5988e2;">
       New Transaction <i class="fa fa-plus-circle"></i>
     </button>
-    <!-- Search Input -->
     <input type="text" id="searchInput" class="form-control search-input" placeholder="Search" onkeyup="searchTable()">
   </div>
-<div class="table-responsive">
-  <table class="table table-borderless table-hover table-striped">
-    <thead class="table-header">
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Tracking #</th>
-        <th scope="col">Laundry Item</th>
-        <th scope="col">Qty</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Date</th>
-        <th scope="col">Status</th>
-        <th scope="col">Price</th>
-        <th scope="col">Service</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody class="">
-      @for (item of trans; track item.Tracking_number) {
-      <tr (click)="viewItem(item.Tracking_number)">
-        <td></td>
-        <td>{{item.Tracking_number}}</td>
-        <td>{{item.Category}}</td>
-        <td>{{item.totalQty}}</td>
-        <td>{{item.totalWeight}}</td>
-        <td>{{item.Transac_date}}</td>
-        <td><p  class="badge status-pending">{{item.service}}</p></td>
-        <td>{{item.totalprice}}</td>
-        <td>
-          <p class="status pending">{{item.Transac_status}}</p>
-        </td>
-        <td>
-          <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.Tracking_number, item)">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </button>
-          <!-- <button class="btn custom-action-btn custom-view-btn" (click)="viewItem(item.Tracking_number)">
-            <i class="fa fa-eye" aria-hidden="true"></i>
-          </button> -->
-          <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.Tracking_number)"> 
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-          </button>
-        </td>                  
-      </tr>
-      }
-    </tbody>
-  </table>
-</div>
-</div>
+  
 
-<!-- The Modal -->
-<div class="modal" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="d-flex"></div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <form [formGroup]="newtransac" id="manage-laundry">
-            <div class="col-lg-12">
-              <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                  <div class="form-group">
-                    <label for="trackingNumber" class="control-label">Tracking Number</label>
-                    <input type="hidden" [value]="trackingNumber" formControlName="Tracking_number">
-                    <h4 class="modal-title"><strong>{{ trackingNumber }}</strong></h4>
-                  </div>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-12 col-md-4 mb-3">
-                  <div class="form-group">
-                    <label for="laundryType" class="control-label">Laundry Type</label>
-                    <select class="form-control" id="laundryType" formControlName="Category">
-                      <option value="" disabled selected>Select Laundry Type</option>
-                      @for(c of categ; track c.Categ_ID){
-                        <option [value]="c.Categ_ID">{{c.Category}}</option>
-                      }
-                    </select>
-                  </div>
-                </div>
-                <div class="col-12 col-md-4 mb-3">
-                  <div class="form-group">
-                    <label for="weight" class="control-label">Count</label>
-                    <input type="number" step="any" min="1" class="form-control text-right" id="weight" formControlName="Qty">
-                  </div>
-                </div>
-
-                <!-- Count -->
-                <div class="col-sm-2">
-                  <div class="form-group">
-                    <label for="weight" class="control-label">Count</label>
-                    <input type="number" step="any" min="1" value="1" class="form-control text-right" id="weight">
-                  </div>
-                </div>
-
-                
-
-                <div class="col-12 col-md-4 d-flex align-items-end mb-3">
-                  <div class="form-group w-100">
-                    <button class="btn btn-sm w-100" type="button" id="add_to_list" style="background-color: #5988e2;" (click)="addToList()"><i class="fa fa-plus"></i> Add to List</button>
-                  </div>
-                </div>
-              </div>
-              <!-- Services (Hand Wash, Press) -->
-              <div class="row">
-                <div class="col-12 col-md-6 mb-3">
-                  <div class="form-group">
-                    <label for="services" class="control-label">Services</label><br>
-                    <div class="d-flex">
-                      <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="rush">
-                        <label class="form-check-label" for="rush">Rush Jobs</label>
-                      </div>
-                      <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="pick">
-                        <label class="form-check-label" for="pick-up">Pick-up</label>
-                      </div>
-                      <div class="form-check me-3">
-                        <input class="form-check-input" type="radio" formControlName="Transac_status" id="both" value="deliver">
-                        <label class="form-check-label" for="delivery">Delivery</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <table class="table table-bordered" id="list">
-                    <colgroup>
-                      <col width="30%">
-                      <col width="15%">
-                    </colgroup>
-                    <thead>
-                      <tr>
-                        <th class="text-center">Category</th>
-                        <th class="text-center">Qty</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @for(l of laundrylist; track l.category ){
-                        <tr>
-                          <td class="text-center">{{l.Category}}</td>
-                          <td class="text-center">{{l.Qty}}</td>
-                        </tr>
-                      }
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <hr>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="insert()">Save</button>
-      </div>
-    </div>
+  <div class="table-responsive">
+    <table class="table table-borderless table-hover table-striped">
+      <thead class="table-header">
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Tracking #</th>
+          <th scope="col">Laundry Item</th>
+          <th scope="col">Qty</th>
+          <th scope="col">Weight</th>
+          <th scope="col">Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Price</th>
+          <th scope="col">Service</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of trans; track item.track_num) {
+        <tr>
+          <td></td>
+          <td (click)="viewItem(item.track_num)">{{item.track_num}}</td>
+          <td (click)="viewItem(item.track_num)">{{item.Category}}</td>
+          <td (click)="viewItem(item.track_num)">{{item.totalQty}}</td>
+          <td (click)="viewItem(item.track_num)">{{item.totalWeight}}</td>
+          <td (click)="viewItem(item.track_num)">{{item.Transac_date}}</td>
+          <td><span class="status pending">{{item.service}}</span></td>
+          <td>{{item.totalprice}}</td>
+          <td>{{item.Transac_status}}</td>
+          <td>
+            <button class="btn custom-action-btn custom-update-btn" (click)="showDetails(item.track_num, item)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="btn custom-action-btn custom-cancel-btn" (click)="cancelItem(item.track_num)">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
   </div>
 </div>
-
-
 
 <!-- UPDATED UPDATE MODAL -->
 <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" #updateModal>
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Update Transaction</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div>
-          <label>Tracking Number: {{ selectedTransaction?.Tracking_number }}</label>
-        </div>
         <div class="mb-3">
-          <label for="services" class="control-label">Service Type: {{ selectedTransaction?.service }}</label><br>
-          <div class="d-flex">
-            <div class="form-check me-3" *ngFor="let service of availableServices">
-              <!-- <input class="form-check-input" type="radio" [value]="service" [(ngModel)]="selectedTransaction.Transac_status"> -->
-              <label class="form-check-label">{{ selectedTransaction.details.service }}</label>
+          <label>Tracking Number: <strong>{{ selectedTransaction?.track_num }}</strong></label>
+        </div>
+
+        <div class="mb-3">
+          <label for="services" class="service-label">Service Type: <strong>{{ selectedTransaction?.trans_stat }}</strong></label>
+          <div class="d-flex flex-wrap">
+            <label class="service-label">Selected Service: <strong>{{ selectedTransaction?.Transac_status }}</strong></label>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" formControlName="Transac_status" id="rush" value="rush">
+              <label class="form-check-label" for="rush">Rush Jobs</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" formControlName="Transac_status" id="pick" value="pick">
+              <label class="form-check-label" for="pick">Pick-up</label>
+            </div>
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" formControlName="Transac_status" id="deliver" value="deliver">
+              <label class="form-check-label" for="deliver">Delivery</label>
             </div>
           </div>
-          <label>Selected Service: {{ selectedTransaction?.Transac_status }}</label>
         </div>
-        <table>
+        
+
+        <table class="table table-responsive table-bordered">
           <tbody>
-              <tr *ngFor="let detail of selectedTransaction?.details; let i = index">
-              
-                  <td>
-                      <select class="form-control" [(ngModel)]="detail.Categ_ID">
-                          <option value="" disabled>Select Category</option>
-                          <ng-container *ngFor="let category of categ">
-                              <option [value]="category.Categ_ID">{{ category.Category }}</option>
-                          </ng-container>
-                      </select>
-                  </td>
-                  <td>
-                      <input type="number" class="form-control" [(ngModel)]="detail.Qty" placeholder="Enter quantity" min="1">
-                  </td>
-                  <td>
-                      <button class="btn btn-danger" (click)="removeDetail(i)">Remove</button>
-                      <h1>{{detail.Category}}</h1>
-                  </td>
-              </tr>
+            <tr *ngFor="let detail of selectedTransaction?.details; let i = index">
+              <td>
+                <select class="form-select" [(ngModel)]="detail.Categ_ID">
+                  <option value="" disabled>Select Category</option>
+                  <ng-container *ngFor="let category of categ">
+                    <option [value]="category.Categ_ID">{{ category.Category }}</option>
+                  </ng-container>
+                </select>
+              </td>
+              <td>
+                <input type="number" class="form-control" [(ngModel)]="detail.Qty" placeholder="Enter quantity" min="1">
+              </td>
+              <td>
+                <button class="btn btn-danger btn-sm" (click)="removeDetail(i)">Remove</button>
+              </td>
+            </tr>
           </tbody>
-      </table>
-      <button class="btn btn-success" (click)="addDetail()">Add</button>
+        </table>
+
+        <div class="text-end mt-2">
+          <button class="btn btn-success btn-sm" (click)="addDetail()">Add Item</button>
+        </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" (click)="updateTransaction()">Save changes</button>
@@ -225,6 +116,3 @@
     </div>
   </div>
 </div>
-
-
-

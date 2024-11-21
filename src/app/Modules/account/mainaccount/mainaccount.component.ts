@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
     selectedFile: any;
     imagePreview: any;
     cusid: any;
+    showPassword: boolean = false;
 
     constructor(private myserv:MyServiceService){}
 
@@ -44,7 +45,9 @@ import Swal from 'sweetalert2';
         console.log(this.customerData)
       })
     }
-
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword; 
+    }
     
 
     save() {
