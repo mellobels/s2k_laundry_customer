@@ -1,82 +1,78 @@
-/* Container Styling */
-.container-fluid {
-    padding: 20px;
-    background-color: #fff;
-  }
-  
-  /* Search bar styling */
+.pagination-container {
+  margin-top: 20px;
+}
+
+.pagination .page-item {
+  cursor: pointer;
+}
+
+.pagination .page-item.disabled .page-link {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #5988e2;
+  color: #fff;
+  border-color: #5988e2;
+}
+
+.pagination .page-link {
+  color: #5988e2;
+  border: 1px solid #dee2e6;
+  margin: 0 5px;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.pagination .page-link:hover {
+  background-color: #f1f1f1;
+  color: #5988e2;
+}
+
+/* Responsive table for small screens */
+.table-responsive {
+  overflow-x: auto;
+}
+/* Custom button color */
+.btn-custom {
+  background-color: #5988e2;
+  color: white;
+  border: 1px solid #5988e2;
+}
+
+.btn-custom:hover {
+  background-color: #4e72b4; /* Darker shade for hover effect */
+  color: white;
+  border-color: #4e72b4;
+}
+
+/* Optional: Adjust the focus style */
+.btn-custom:focus {
+  box-shadow: 0 0 0 0.2rem rgba(89, 136, 226, 0.5);
+}
+
+/* Mobile responsiveness for filter buttons and search bar */
+@media (max-width: 768px) {
   .search-bar-container {
-    display: flex;
-    align-items: center;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .search-input {
-    height: 35px;
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    background-color: transparent;
-    outline: none;
-  }
-  
-  .search-addon {
-    background-color: transparent;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .search-icon {
-    font-size: 16px;
-    color: #194280;
-  }
-  
-  .search-addon:hover .search-icon {
-    color: #0056b3;
-  }
-  
-  /* Table Styling */
-  .custom-table {
     width: 100%;
-    border-collapse: separate; /* Separate borders for rounded corners */
-    border-spacing: 0; /* No spacing between cells */
-    background-color: #fff;
-    border-radius: 8px; /* Add rounded corners */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add shadow */
-    overflow: hidden; /* Ensure rounded corners */
   }
-  
-  .table thead th {
-    background-color: #f8f9fa; /* Light background for the table header */
-    text-align: center; /* Center align header text */
+
+  .btn-group {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .table-bordered {
-    border: none; /* Remove default borders */
+
+  .btn-group .btn {
+    width: 100%;
+    margin-bottom: 5px;
   }
-  
-  .table-bordered th,
-  .table-bordered td {
-    border: 1px solid #dee2e6; /* Subtle border for cells */
+
+  .pagination-container {
+    text-align: center;
   }
-  
-  /* Hover effect for table rows */
-  .table-hover tbody tr:hover {
-    background-color: #f5f5f5; /* Light gray background on hover */
-    cursor: pointer;
+
+  .pagination .page-link {
+    padding: 5px 10px;
   }
-  
-  .table-hover tbody tr:hover td {
-    color: #000; /* Change text color on hover */
-  }
-  
-  /* Ensure buttons remain styled on hover */
-  .btn-transparent:hover {
-    background-color: transparent; /* No background on hover */
-    color: #0056b3; /* Slightly darker blue on hover */
-  }
-  
+}

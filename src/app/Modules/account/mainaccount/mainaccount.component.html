@@ -1,20 +1,20 @@
 <div class="container rounded bg-white my-4">
     <div class="row">
         <!-- Profile Picture Section -->
-        <div class="col-lg-4 col-md-5 col-sm-12 border-right">
+        <div class="col-lg-4 col-md-5 col-sm-12 border-right profile-picture-section">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                 <div class="d-flex flex-column align-items-center">
-                    <img [src]="imagePreview" alt="Customer" class="rounded-circle mb-2 img-fluid" 
+                    <img [src]="imagePreview" alt="Customer" class="rounded-circle mb-2 img-fluid profile-image" 
                          style="width: 100px; height: 100px; object-fit: cover; border: 2px solid #ddd;">
                     <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" 
                            formControlName="Cust_image" style="display: none;">
-                    <label for="fileInput" class="cursor-pointer mt-2">
+                    <label for="fileInput" class="cursor-pointer mt-2 upload-photo-btn">
                         <i class="fas fa-camera" style="color: #929292; font-size: 1.5rem;"></i>
                     </label>
                 </div>
                 <div class="mt-3">
                     <span class="font-weight-bold">Name</span><br>
-                    <span class="text-black-50">emailexample.com</span><br>
+                    <span class="text-black-50">{{customerData?.Cust_fname}}</span><br>
                     <span>Customer Address</span>
                 </div>
             </div>
@@ -33,36 +33,36 @@
                 <form [formGroup]="profileform" (ngSubmit)="save()">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="lname" style="font-weight: 600; color: #333;">Last Name</label>
+                            <label for="lname" class="form-label">Last Name</label>
                             <input type="text" class="form-control" id="lname" formControlName="Cust_lname" 
                                    [value]="customerData?.Cust_lname">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="fname" style="font-weight: 600; color: #333;">First Name</label>
+                            <label for="fname" class="form-label">First Name</label>
                             <input type="text" class="form-control" id="fname" formControlName="Cust_fname" 
                                    [value]="customerData?.Cust_fname">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="mname" style="font-weight: 600; color: #333;">Middle Name</label>
+                            <label for="mname" class="form-label">Middle Name</label>
                             <input type="text" class="form-control" id="mname" formControlName="Cust_mname" 
                                    [value]="customerData?.Cust_mname">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="phone" style="font-weight: 600; color: #333;">Phone</label>
+                            <label for="phone" class="form-label">Phone</label>
                             <input type="text" class="form-control" id="phone" formControlName="Cust_phoneno" 
                                    [value]="customerData?.Cust_phoneno">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="email" style="font-weight: 600; color: #333;">Email</label>
+                            <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" formControlName="Cust_email" 
                                    [value]="customerData?.Cust_email">
                         </div>
                         <div class="col-md-6 mb-3 position-relative">
-                            <label for="password" style="font-weight: 600; color: #333;">Password</label>
+                            <label for="password" class="form-label">Password</label>
                             <input 
                                 type="{{ showPassword ? 'text' : 'password' }}" 
                                 class="form-control password-input" 
@@ -75,11 +75,10 @@
                                 class="fa {{ showPassword ? 'fa-eye-slash' : 'fa-eye' }} password-toggle-icon">
                             </i>
                         </div>
-                        
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-3">
-                            <label for="address">Address</label>
+                            <label for="address" class="form-label">Address</label>
                             <input type="text" class="form-control" id="address" formControlName="Cust_address" 
                                    [value]="customerData?.Cust_address">
                         </div>

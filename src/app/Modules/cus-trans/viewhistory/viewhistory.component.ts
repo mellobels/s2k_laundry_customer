@@ -6,69 +6,61 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-viewhistory',
   standalone: true,
-  imports: [RouterLink,CommonModule],
+  imports: [CommonModule],
   templateUrl: './viewhistory.component.html',
   styleUrl: './viewhistory.component.css'
 })
-export class ViewhistoryComponent implements OnInit{
-
-  constructor(private post: MyServiceService,private router:Router){}
-
+export class ViewhistoryComponent implements OnInit {
+onSearch($event: Event) {
+throw new Error('Method not implemented.');
+}
   id = localStorage.getItem("Cust_ID");
-  hist:any;
-  transDet_ID:any;
-  temp:any;
-
-  histf: any[] = []; // Original data source
+  histf: any[] = []; // Original data
   filteredHist: any[] = []; // Filtered data for display
+  paginatedHist: any[] = []; // Data for the current page
+  currentPage: number = 1;
+  rowsPerPage: number = 15; // Number of rows per page
+  totalPages: number = 1;
+  totalPagesArray: number[] = []; // Array to generate pagination buttons
 
+  constructor(private post: MyServiceService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.id);
-  
-    // Fetch data from the API
-    this.post.gethis(this.id).subscribe((data: any) => {
-      this.hist = data;
-      this.histf = data; // Populate the original data source
-  
-      // Initially display all entries after data is loaded
-      this.filteredHist = this.histf;
-  
-      // Debugging: Ensure data is correctly retrieved
-      console.log(this.hist);
-      console.log(data);
-      console.log(this.id);
-    });
+      this.post.gethis(this.id).subscribe((data: any) => {
+          this.histf = data;
+          this.filteredHist = this.histf; // Initialize filtered data
+          this.updatePagination();
+      });
   }
 
   filterStatus(status: string): void {
-    if (status === 'All') {
-      // Show all items if "All" is selected
-      this.filteredHist = this.histf;
-    }else if(status === 'for Release'){
-      this.filteredHist = this.histf.filter(h=> h.Transac_status === status);
-    }else{
-      // Filter by selected status
-      this.filteredHist = this.histf.filter(h => h.Transac_status === status);
-    }
+      if (status === 'All') {
+          this.filteredHist = this.histf;
+      } else {
+          this.filteredHist = this.histf.filter(h => h.Transac_status === status);
+      }
+      this.currentPage = 1; // Reset to the first page
+      this.updatePagination();
   }
 
-  
-  viewItem(data: any) {
-    // Implement logic to view details of the item based on tracking number
-    this.post.getTransId(data).subscribe((result:any)=>{
-    this.transDet_ID = data;
-    this.temp = data;
-    console.log(this.temp);
-    console.log(result);
-    // console.log("ITO ANG PRIMARY KEY: ", this.transDet_ID);
-    console.log("ITO ANG PRIMARY KEY: ", this.temp);
-    localStorage.setItem('temp_ID', this.temp);
-    this.router.navigate(['/main/maintrans/maintrans/panel/historydetails']);
-    });
-    
+  updatePagination(): void {
+      this.totalPages = Math.ceil(this.filteredHist.length / this.rowsPerPage);
+      this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+      const startIndex = (this.currentPage - 1) * this.rowsPerPage;
+      const endIndex = startIndex + this.rowsPerPage;
+      this.paginatedHist = this.filteredHist.slice(startIndex, endIndex);
   }
 
-  
+  changePage(page: number): void {
+      if (page < 1 || page > this.totalPages) return; // Prevent invalid page changes
+      this.currentPage = page;
+      this.updatePagination();
+  }
 
+  viewItem(data: any): void {
+      this.post.getTransId(data).subscribe((result: any) => {
+          localStorage.setItem('temp_ID', data);
+          this.router.navigate(['/main/maintrans/maintrans/panel/historydetails']);
+      });
+  }
 }
