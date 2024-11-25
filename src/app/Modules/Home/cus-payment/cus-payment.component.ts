@@ -85,6 +85,7 @@ export class CusPaymentComponent implements OnInit {
     this.http.post(`http://localhost:8000/api/upload/${this.trackingNumber}`, formData)
       .subscribe({
         next: (response) => {
+           console.log(this.selectedFile)
           Swal.fire({
             title: 'Success!',
             text: 'Payment uploaded successfully.',
