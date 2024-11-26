@@ -41,7 +41,7 @@ import Swal from 'sweetalert2';
       this.cusid = {id: localStorage.getItem("Cust_ID")};
       this.myserv.getcustomer(this.cusid.id).subscribe((data:any)=>{
         console.log(data);
-        this.customerData = data;
+        this.customerData = data.customerData;
         console.log(this.customerData)
       })
     }

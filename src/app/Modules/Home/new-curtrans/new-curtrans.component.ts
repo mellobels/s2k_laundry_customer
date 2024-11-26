@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-new-curtrans',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './new-curtrans.component.html',
   styleUrls: ['./new-curtrans.component.css']
 })
@@ -19,12 +19,13 @@ export class NewCurtransComponent implements OnInit {
   trackingNumber: any;
   customerdata: any;
   laundry: any;
+  Tracking_Number: any;
   
   id = { cuid: localStorage.getItem('Cust_ID') };
   laundrylist: any[] = [];
   
   newtransac = new FormGroup({
-    Tracking_number: new FormControl(null),
+    Tracking_Number: new FormControl(null),
     Cust_ID: new FormControl(this.id.cuid),
     Transac_status: new FormControl('Pending'),
     laundry: new FormControl(this.laundrylist),
@@ -47,11 +48,18 @@ export class NewCurtransComponent implements OnInit {
     });
   }
 
-  gentrack() {
-    const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
-    this.trackingNumber = `S2K-${randomNumber}`;
-    this.newtransac.controls['Tracking_number'].setValue(this.trackingNumber);
+  gentrack(){
+    this.post.getTrackingNumber().subscribe((data:any)=>{
+      this.Tracking_Number = data;
+      console.log(this.Tracking_Number)
+    })
   }
+
+  // gentrack() {
+  //   const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
+  //   this.trackingNumber = `S2K-${randomNumber}`;
+  //   this.newtransac.controls['Tracking_number'].setValue(this.trackingNumber);
+  // }
 
   addToList() {
     const selectElement = document.getElementById('laundryType') as HTMLSelectElement;
@@ -76,27 +84,30 @@ export class NewCurtransComponent implements OnInit {
   insert() {
     if (this.laundrylist.length === 0) {
       Swal.fire({
-        position: "center",
-        icon: "warning",
-        title: "Please add at least one item to the list before saving!",
+        position: 'center',
+        icon: 'warning',
+        title: 'Please add at least one item to the list before saving!',
         showConfirmButton: true,
       });
       return;
     }
-
-    // Update the laundry field in the form group with the laundrylist data
+  
+    // Add Tracking_Number and laundry data to the form
     this.newtransac.patchValue({
-      laundry: this.laundrylist
+      Tracking_Number: this.Tracking_Number,
+      laundry: this.laundrylist,
     });
-
+  
+    console.log('Payload:', this.newtransac.value); // Debug payload
+  
     this.post.addtrans(this.newtransac.value).subscribe(
       (result: any) => {
-        console.log(result);
+        console.log('API Response:', result);
         if (result && result.Transaction) {
           Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Transaction details added successfully!",
+            position: 'center',
+            icon: 'success',
+            title: 'Transaction details added successfully!',
             showConfirmButton: true,
           }).then(() => {
             this.route.navigate(['/main/cusmainhome/homemain/cuscurtrans']);
@@ -105,9 +116,9 @@ export class NewCurtransComponent implements OnInit {
         } else {
           console.error('Unexpected response:', result);
           Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Error occurred during saving: " + (result.message || 'Unknown error'),
+            position: 'center',
+            icon: 'error',
+            title: `Error occurred during saving: ${result.message || 'Unknown error'}`,
             showConfirmButton: true,
           });
         }
@@ -115,15 +126,16 @@ export class NewCurtransComponent implements OnInit {
       (error) => {
         console.error('API Error:', error);
         Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "An error occurred while saving. Please try again.",
+          position: 'top-end',
+          icon: 'error',
+          title: 'An error occurred while saving. Please try again.',
           text: error.message || 'No additional error details provided by the server',
           showConfirmButton: true,
         });
       }
     );
   }
+  
 
   fetchtransactions() {
     this.post.display(this.id.cuid).subscribe((data: any) => {

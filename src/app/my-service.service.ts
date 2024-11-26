@@ -59,9 +59,9 @@ export class MyServiceService {
   displaycateg(){
     return this.http.get(this.url + 's2kdisplaycategory.php');
   }
-  getTrackingNumber() {
-    return this.http.get(this.url + 'generate_tracking.php');
-  }
+  // getTrackingNumber() {
+  //   return this.http.get(this.url + 'generate_tracking.php');
+  // }
   // showhis(gdata:any){
   //   return this.http.get(this.url + 'get_history.php?cust_id='+ gdata);
   // }
@@ -131,6 +131,10 @@ export class MyServiceService {
   }
   gethis(id:any):Observable<any>{
     return this.http.get(`${this.Apiurl}gethis/${id}`)
+  }
+
+  getTrackingNumber() {
+    return this.http.get(this.Apiurl + 'getTrackingNo');
   }
 
 

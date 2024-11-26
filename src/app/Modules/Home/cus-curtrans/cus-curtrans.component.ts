@@ -136,15 +136,27 @@ export class CusCurtransComponent implements OnInit{
       this.fetchtransactions();
       console.log(this.trans);
     })
+
+    // this.gentrack();
   }
+
+  // gentrack(){
+  //  const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
+  //  this.Tracking_Number = `S2K-${randomNumber}`;
+
+  //  this.newtransac.controls['Tracking_number'].setValue(this.Tracking_Number);
+  //  this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
+  // }
 
   gentrack(){
-   const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
-   this.Tracking_Number = `S2K-${randomNumber}`;
+    this.post.getTrackingNumber().subscribe((data:any)=>{
+      this.Tracking_Number = data;
 
-   this.newtransac.controls['Tracking_number'].setValue(this.Tracking_Number);
-   this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
+      this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
+      console.log(this.Tracking_Number)
+    })
   }
+
   updateTransaction() {
     if (this.selectedTransaction && this.selectedTransaction.details) {
       const updates: any[] = [];
