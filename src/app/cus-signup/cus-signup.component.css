@@ -29,7 +29,7 @@ section {
     height: 3px;
     width: 30px;
     border-radius: 5px;
-    background: linear-gradient(135deg, #11e0e2, #5988e2);
+    /* background: linear-gradient(135deg, #11e0e2, #5988e2); */
   }
   .content form .user-details {
     display: flex;
@@ -138,5 +138,8 @@ section {
   @media(max-width: 459px) {
     .container .content .category {
       flex-direction: column;
+    }
+    .already-account {
+      flex-direction: column; /* Stack the text and link on smaller screens */
     }
   }

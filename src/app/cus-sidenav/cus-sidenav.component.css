@@ -1,71 +1,180 @@
-.nav-item {
-  font-size: 18px;
-  text-transform: uppercase;
-  height: 82px;
-  line-height: 64px;
-  margin: 0 10px; /* Adjust spacing between nav items */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5988e2;
+  padding: 1em;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Navbar shadow */
 }
 
-.flare {
-  background: #5988e2;
+/* Logo Styling */
+#logo {
+  display: flex;
+  align-items: center; /* Center logo vertically */
 }
 
-.flare a.nav-link {
-  color: #fff !important;
+#logo img {
+  height: 62px; /* Consistent logo height */
+  max-width: 100%; /* Prevent overflow */
+  object-fit: contain; /* Maintain aspect ratio */
 }
 
-.topbarElements > div:nth-of-type(1) {
-  font-size: 1.5rem; /* Adjusted font size */
-  color: #ccc;
-}
-
-@media screen and (min-width: 1040px) {
-  .flare {
-    margin-right: -15px;
+/* Responsive Styling for Logo */
+@media screen and (max-width: 768px) {
+  #logo img {
+    height: 50px; /* Adjust logo size for tablets */
   }
 }
 
-@media screen and (max-width: 1029px) {
-  .navbar-nav {
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .nav-item {
-    background: rgba(255, 255, 255, 0.1);
-    margin: 2px;
-    line-height: 1.5rem; /* Adjust line height for better readability */
+@media screen and (max-width: 576px) {
+  #logo img {
+    height: 40px; /* Smaller logo for mobile */
   }
 }
 
-.navbar-nav .nav-link {
-  position: relative;
+/* Navbar Links */
+nav a {
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  font-size: 20px;
+  text-transform: capitalize;
+  color: #ffffff;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.navbar-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  display: block;
-  margin: auto;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #eec718; /* Line color */
-  transition: width 0.2s ease-in-out;
+ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5em; /* Spacing between links */
 }
 
-.navbar-nav .nav-link:hover::after {
-  width: 100%; /* Full width on hover */
-}
-.collapse {
-  transition: max-height 0.3s ease-in-out;
+ul a {
+  padding: 0.5em;
+  transition: background-color 0.3s ease;
 }
 
-.collapse.show {
-  /* display: block !important; */
-  max-height: 500px; /* Adjust as needed */
+ul a:hover {
+  background-color: #ffffff; /* Hover effect */
+  color: #5988e2;
+  border-radius: 0.5em; /* Rounded hover */
 }
+
+/* Hamburger Menu */
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 600px) {
+  label {
+    display: block; /* Show hamburger icon */
+  }
+
+  ul {
+    position: absolute;
+    top: 60px;
+    left: -100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333333;
+    width: 100%;
+    height: calc(100vh - 60px);
+    padding-top: 2em;
+    transition: left 0.5s ease; /* Slide-in effect */
+  }
+
+  input[type="checkbox"]:checked ~ ul {
+    left: 0; /* Show menu when checked */
+  }
+
+  ul a {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+  }
+
+  ul a:hover {
+    background-color: #2c8eec;
+    color: #ffffff;
+  }
+}
+
+/* Top Bar Styles */
+.topbar {
+  background-color: #eee;
+  color: #164482;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 0.5em 0;
+}
+
+.topbar .row {
+  margin: 0;
+}
+
+.topbar .col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topbarElements {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.topbarElements div:first-child {
+  font-size: 1.5rem;
+  color: #5988e2;
+}
+
+.topbarElements p {
+  margin: 0;
+  color: #666666;
+  font-size: 0.85rem;
+}
+
+/* Top Bar Icon Hover */
+.topbarElements div:first-child:hover {
+  color: #2c8eec;
+}
+
+/* Responsive Top Bar */
+@media screen and (max-width: 768px) {
+  .topbar .row {
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  .topbar .col {
+    flex: 1 1 100%; /* Full width */
+    text-align: center;
+    border: none; /* Remove borders */
+  }
+
+  .topbarElements {
+    flex-direction: column; /* Stack vertically */
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .topbarElements p {
+    font-size: 0.75rem; /* Smaller text */
+  }
+
+  .topbarElements div:first-child {
+    font-size: 1.2rem; /* Smaller icons */
+  }
+}
+
+
+

@@ -1,17 +1,17 @@
 .container-fluid {
   padding: 1rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for the search input and button container */
-.d-flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
+.table-primary {
+  background-color: #4a74c6;
+  color: white;
+  text-align: center;
 }
 
-/* Adjust the button and input field on small screens */
 .search-input {
   max-width: 300px;
   width: 100%;
@@ -20,58 +20,12 @@
   border: 1px solid #ccc;
   font-size: 1rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  margin-top: 0.5rem;
 }
 
 .search-input:focus {
-  border-color: #5988e2;
-  box-shadow: 0 0 8px rgba(89, 136, 226, 0.5);
+  border-color: #4a74c6;
+  box-shadow: 0 0 8px rgba(74, 116, 198, 0.5);
   outline: none;
-}
-
-.search-input::placeholder {
-  color: #888;
-  font-style: italic;
-}
-
-/* Media query for small screens (max-width: 576px) */
-@media (max-width: 576px) {
-  .d-flex {
-    flex-direction: column;
-    align-items: flex-start;  /* Align items to the left on mobile */
-  }
-
-  /* Button and search input take full width on small screens */
-  .btn {
-    width: 100%;
-    margin-bottom: 1rem;  /* Space between button and search field */
-  }
-
-  .search-input {
-    width: 100%;  /* Full width for the search input */
-    margin-top: 0.5rem;  /* Adjust margin */
-  }
-}
-
-/* Media query for medium to large screens */
-@media (min-width: 576px) {
-  .btn {
-    margin-right: 1rem; /* Space between button and input */
-  }
-}
-
-
-
-.table-responsive {
-  overflow-x: auto;
-  max-height: 100%;
-}
-
-.table-scroll {
-  display: block;
-  max-height: 400px;
-  overflow-y: auto;
 }
 
 .status.pending {
@@ -82,56 +36,45 @@
   font-size: 0.875rem;
 }
 
-.custom-action-btn {
-  width: 30px;
-  height: 30px;
-  margin: 2px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
+.btn-primary {
+  background-color: #4a74c6;
+  border: none;
+  box-shadow: 0 0 8px rgba(74, 116, 198, 0.5);
 }
 
-.custom-update-btn {
-  background-color: #007bff;
-  color: white;
-}
-
-.custom-update-btn:hover {
-  background-color: #0056b3;
-}
-
-.custom-cancel-btn {
+.btn-danger {
   background-color: #dc3545;
-  color: white;
 }
 
-.custom-cancel-btn:hover {
-  background-color: #c82333;
+.card {
+  border-radius: 8px;
 }
 
-@media (max-width: 992px) {
-  .table-scroll {
-    max-height: 300px;
+.card-title {
+  font-weight: bold;
+  color: #4a74c6;
+}
+
+.card-text strong {
+  color: #333;
+}
+
+@media (min-width: 768px) {
+  .mobile-table {
+    display: none;
   }
 }
 
-@media (max-width: 576px) {
-  .table-responsive {
-    font-size: 0.9rem;
+@media (max-width: 768px) {
+  .d-md-table {
+    display: none;
   }
-  .custom-action-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
-  }
-  .search-input {
-    width: 100%;
+
+  .mobile-table .card {
     margin-bottom: 1rem;
   }
 }
+
 
 .modal-content {
   padding: 1rem;
@@ -167,7 +110,7 @@
 .table th, .table td {
   white-space: nowrap;
 }
-/* Style the label for service type */
+
 .control-label {
   font-weight: bold;
   font-size: 1rem;
@@ -175,7 +118,7 @@
   color: #333;
 }
 
-/* Service label displaying selected status */
+
 .service-label {
   font-size: 1rem;
   color: #555;
@@ -183,14 +126,13 @@
   margin-top: 0.5rem;
 }
 
-/* Flexbox to make the radio buttons line up properly */
 .d-flex {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-/* Styling the radio buttons and labels */
+
 .form-check {
   display: flex;
   align-items: center;
@@ -206,7 +148,7 @@
   color: #555;
 }
 
-/* Add some spacing and alignment to radio buttons for small screens */
+
 @media (max-width: 576px) {
   .form-check {
     flex-direction: column;
@@ -233,13 +175,24 @@
   }
 }
 
-/* Add a background color to the selected option */
 .form-check-input:checked + .form-check-label {
-  color: #007bff; /* Change label color when checked */
+  color: #007bff; 
   font-weight: bold;
 }
 
-/* Style for selected service */
+
 strong {
   color: #007bff;
 }
+.btn-primary {
+  background: #4a74c6;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #3759a8;
+}
+
+
+

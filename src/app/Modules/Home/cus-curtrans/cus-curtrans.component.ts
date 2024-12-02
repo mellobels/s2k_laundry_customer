@@ -5,12 +5,13 @@ import { MyServiceService } from '../../../my-service.service';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import * as bootstrap from 'bootstrap';
+import { SearchFilterPipe } from '../../../search-filter.pipe';
 
 
 @Component({
   selector: 'app-cus-curtrans',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule, SearchFilterPipe],
   templateUrl: './cus-curtrans.component.html',
   styleUrl: './cus-curtrans.component.css'
 })
@@ -24,12 +25,11 @@ export class CusCurtransComponent implements OnInit{
   selectedTransaction: any = {}; // This will hold the selected transaction details
   deletedDetails: number[] = [];  // Array to track deleted transaction details
   availableServices: any;
+
   
-  constructor(
-    private route: Router,
-    private user: MyServiceService
-  
-  ){}
+  constructor(private route: Router, private user: MyServiceService){
+
+  }
 
   list: any;
   Tracking_Number:any;
@@ -40,6 +40,8 @@ export class CusCurtransComponent implements OnInit{
   
   category:any;
   qty:any;
+  keyword: any;
+  searchText:any;
 
   laundrylist = this.post.post; 
 
@@ -51,26 +53,9 @@ export class CusCurtransComponent implements OnInit{
     Categ_ID: new FormControl(this.laundrylist)
   })
   
-  // addToList() {
-  //   const laundryType = (document.getElementById('laundryType') as HTMLInputElement).value;
-  //   const count = (document.getElementById('weight') as HTMLInputElement).value;
-  //   if(laundryType && count != null){
-  //     const newItem = {
-  //       Categ_ID: laundryType,
-  //       Qty: count,
-  //     };
-  //     this.laundrylist.push(newItem);
-  //     console.log(this.laundrylist);
+  
 
-  //     const laundryTypes = (document.getElementById('laundryType') as HTMLInputElement);
-  //     laundryTypes.value = '';
-
-  //     const counts = (document.getElementById('weight') as HTMLInputElement);
-  //     counts.value = '';
-  //   }
-  // }
-
-  addToList() {
+  addToList(){
     // Cast the select element to HTMLSelectElement
     const selectElement = document.getElementById('laundryType') as HTMLSelectElement;
     const laundryType = selectElement.value;
@@ -101,11 +86,12 @@ export class CusCurtransComponent implements OnInit{
       (document.getElementById('weight') as HTMLInputElement).value = '';
     }
   }
+
   fetchtransactions(){
     this.post.display(this.id.cuid).subscribe((data:any)=>{
       this.trans = data.transaction;
       if(this.trans && this.trans.length > 0){
-        const pendingTransactions = this.trans.filter((transs: any) => transs.trans_stat === 'handWash' || transs.trans_stat === 'press' || transs.trans_stat === 'rush' || transs.trans_stat === 'pick' || transs.trans_stat === 'deliver' || transs.trans_stat === 'paid');
+        const pendingTransactions = this.trans.filter((transs: any) => transs.trans_stat === 'Shipped' || transs.trans_stat === 'Ordered' || transs.trans_stat === 'rush' || transs.trans_stat === 'pick' || transs.trans_stat === 'deliver' || transs.trans_stat === 'On the way' || transs.trans_stat === 'pending');
 
         if(pendingTransactions.length > 0){
           console.log('Pending Trans', pendingTransactions);
@@ -115,18 +101,11 @@ export class CusCurtransComponent implements OnInit{
           this.trans = [];
         }
       }
-      console.log(this.trans);
     })
   }
+  
   ngOnInit(): void{
-    // this.fetchransactions();
     console.log(this.id)
-
-    // this.post.displaytransaction().subscribe((data:any)=>{
-    //   this.customerdata = data.transactions;
-    //   console.log(this.customerdata);
-    // })
-
     this.post.displaycategory().subscribe((data:any)=>{
       this.categ = data;
       console.log(this.categ);
@@ -134,19 +113,9 @@ export class CusCurtransComponent implements OnInit{
     this.post.display(this.id.cuid).subscribe((data:any)=>{
       this.trans = data.transaction;
       this.fetchtransactions();
-      console.log(this.trans);
     })
-
-    // this.gentrack();
   }
 
-  // gentrack(){
-  //  const randomNumber = Math.floor(Math.random() * 1000000000000) + 100000000000;
-  //  this.Tracking_Number = `S2K-${randomNumber}`;
-
-  //  this.newtransac.controls['Tracking_number'].setValue(this.Tracking_Number);
-  //  this.route.navigate(["/main/cusmainhome/homemain/newcurtrans"])
-  // }
 
   gentrack(){
     this.post.getTrackingNumber().subscribe((data:any)=>{
@@ -157,7 +126,7 @@ export class CusCurtransComponent implements OnInit{
     })
   }
 
-  updateTransaction() {
+  updateTransaction(){
     if (this.selectedTransaction && this.selectedTransaction.details) {
       const updates: any[] = [];
       const newEntries: any[] = [];

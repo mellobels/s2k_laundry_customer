@@ -1,4 +1,4 @@
-.pagination-container {
+/* .pagination-container {
   margin-top: 20px;
 }
 
@@ -30,11 +30,11 @@
   color: #5988e2;
 }
 
-/* Responsive table for small screens */
+
 .table-responsive {
   overflow-x: auto;
 }
-/* Custom button color */
+
 .btn-custom {
   background-color: #5988e2;
   color: white;
@@ -42,17 +42,16 @@
 }
 
 .btn-custom:hover {
-  background-color: #4e72b4; /* Darker shade for hover effect */
+  background-color: #4e72b4;
   color: white;
   border-color: #4e72b4;
 }
 
-/* Optional: Adjust the focus style */
+
 .btn-custom:focus {
   box-shadow: 0 0 0 0.2rem rgba(89, 136, 226, 0.5);
 }
 
-/* Mobile responsiveness for filter buttons and search bar */
 @media (max-width: 768px) {
   .search-bar-container {
     width: 100%;
@@ -75,4 +74,46 @@
   .pagination .page-link {
     padding: 5px 10px;
   }
+} */
+
+.border-container {
+  padding: 1rem;
+  border-radius: 8px;
 }
+
+.search-bar-container {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  max-width: 300px;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.btn-custom {
+  background-color: #4a74c6;
+  color: #fff;
+  border: none;
+}
+
+.btn-custom:hover {
+  background-color: #365899;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.card-title {
+  font-weight: bold;
+  color: #4a74c6;
+}
+
+@media (max-width: 768px) {
+  .table-responsive {
+    display: none;
+  }
+}
+

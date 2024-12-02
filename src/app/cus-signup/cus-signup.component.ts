@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-cus-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './cus-signup.component.html',
   styleUrls: ['./cus-signup.component.css']  // Corrected from 'styleUrl' to 'styleUrls'
 })

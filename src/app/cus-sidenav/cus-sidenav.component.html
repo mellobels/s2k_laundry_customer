@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<nav class="navbar navbar-expand-lg p-0 m-0" style="background-color: #5988e2;">
+<!-- <nav class="navbar navbar-expand-lg p-0 m-0" style="background-color: #5988e2;">
   <div class="container-fluid">
     <a class="navbar-brand" href="">
       <img src="assets/s2klogo.png" alt="S2K Logo" height="62">
@@ -59,7 +59,24 @@
       </ul>
     </div>
   </div>
+</nav> -->
+
+<nav>
+  <a href="#home" id="logo">
+    <img src="assets/s2k.png" alt="S2K Logo">
+  </a>
+  <input type="checkbox" id="hamburger" />
+  <label for="hamburger">
+    <i class="fa-solid fa-bars"></i>
+  </label>
+  <ul>
+    <li><a [routerLink]="['/main/cusmainhome']" routerLinkActive="active">Home</a></li>
+    <li><a [routerLink]="['/main/maintrans']" routerLinkActive="active">Transactions</a></li>
+    <li><a [routerLink]="['/main/mainaccount']" routerLinkActive="active">Account</a></li>
+    <li><a (click)="logout()" routerLinkActive="active">Logout</a></li>
+  </ul>
 </nav>
+
 
 
 <div class="main-content" style="margin-top: 50px">
